@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload {
+  position: relative;
+  border: 1px dotted var(--foreground);
+  width: 60rem;
+  height: 300px;
+}
+.input {
+  position: absolute;
+  background-color: aqua;
+}
+
+/* preview */
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
