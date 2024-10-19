@@ -1,4 +1,52 @@
 .container {
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.textWrap {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  .mainTitle {
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+  }
+  .subTitle {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 1.6rem;
+  }
+}
+
+/* button */
+.btnWrap {
+  position: relative;
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  .btn {
+    padding: 1rem;
+    font-size: 2rem;
+    &:hover {
+      animation: blink 0.3s infinite linear;
+    }
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 0;
+    color: white;
+  }
+  to {
+    opacity: 100;
+    color: gray;
+  }
 }
