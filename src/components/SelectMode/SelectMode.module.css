@@ -1,0 +1,15 @@
+.wrap {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.link {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.active {
+  color: red;
+}

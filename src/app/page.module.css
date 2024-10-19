@@ -14,30 +14,52 @@
 .textWrap {
   display: flex;
   flex-direction: column;
-  text-align: center;
   .mainTitle {
-    font-size: 3.5rem;
-    margin-bottom: 3rem;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to bottom, rgba(8,254,255,1) 0%, rgba(176,252,92,1) 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    color: var(--yellow);
+  }
+  .emailAndGithub {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: var(--yellow-light);
+    opacity: 0.8;
+    line-height: 1.3;
+    font-family: var(--font-ubuntu-mono);
   }
   .subTitle {
-    font-family: "Share Tech Mono", monospace;
-    font-size: 1.6rem;
+    margin-top: 5rem;
+    font-size: 1.4rem;
+  }
+  .note {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: aqua;
+    padding: 1rem 0;
+    .text {
+      font-size: 1.2rem;
+      font-weight: 400;
+      padding-left: 1rem;
+      color: var(--color);
+    }
   }
 }
 
-/* button */
-.btnWrap {
-  position: relative;
-  margin-top: 10rem;
+.linkWrap {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  .btn {
-    padding: 1rem;
-    font-size: 2rem;
-    &:hover {
-      animation: blink 0.3s infinite linear;
-    }
-  }
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+  margin-top: 2rem;
 }
 
 @keyframes blink {

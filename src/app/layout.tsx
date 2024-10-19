@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Share_Tech_Mono } from "next/font/google";
-import { Sixtyfour } from "next/font/google";
+import { Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
 
 
@@ -10,10 +10,10 @@ const shareTechMono = Share_Tech_Mono({
   variable: '--font-share-tech-mono'
 });
 
-const sixtyFour = Sixtyfour({
+const ubuntuMono = Ubuntu_Mono({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-sixty-four'
+  weight: ['400', '700'],
+  variable: '--font-ubuntu-mono'
 });
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sixtyFour.className} ${shareTechMono.className}`}>
+      <body className={`${ubuntuMono.className} ${shareTechMono.className}`}>
         {children}
       </body>
     </html>
