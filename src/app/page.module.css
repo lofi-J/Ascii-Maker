@@ -71,3 +71,45 @@
     color: gray;
   }
 }
+
+
+/* 404 page */
+.notFoundContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 100vh;
+  .inner {
+    display: flex;
+    .textAsciiWrap {
+      margin-left: 10rem;
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+.imgAscii {
+  font-size: 0.8rem;
+}
+.goHome {
+  text-align: center;
+  font-size: 3rem;
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+}
+
+@media (max-width: 1200px) {
+  .notFoundContainer {
+    .imgAscii { display: none;}
+    .inner {
+      flex-direction: column;
+      align-items: center;
+      .goHome {
+        margin-top: 10vh;
+      }
+    }
+  }
+}
