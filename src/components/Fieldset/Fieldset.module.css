@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: max-content;
+  border: 1px solid gray;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  .title {
+    padding: 0 1rem;
+    position: absolute;
+    font-size: 1.4rem;
+    width: max-content;
+    background-color: var(--background);
+    top: 0;
+    left: 3rem;
+    transform: translateY(-50%);
+  }
+  .children {
+    padding-top: 0.5rem;
+  }
+}
