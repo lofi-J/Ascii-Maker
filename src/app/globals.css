@@ -4,6 +4,8 @@
   --color: rgba(255,255,255, 0.9);
   --yellow: #CCCC00;
   --yellow-light: #e8e800;
+  --green: #00FF00;
+  --blue: #3399FF;
 }
 
 html,
@@ -17,7 +19,6 @@ html {
 body {
   color: var(--color);
   background: var(--background);
-  font-family: var(--font-ubuntu-mono) monospace;
   font-weight: 400;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
