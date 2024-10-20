@@ -15,12 +15,18 @@ export default function Home() {
 ██   ██      ██ ██      ██ ██     ██   ██ ██   ██    ██
 ██   ██ ███████  ██████ ██ ██     ██   ██ ██   ██    ██`}</pre>
           <h3 className={styles.info}><b>Author: Lofi-J</b><b>(v.1.0)</b></h3>
-          <pre className={styles.emailAndGithub}>
-{`===========================================================================
-          [+] Email | lofi2505@gmail.com
-          [+] Github | https://github.com/lofi-J
-===========================================================================`}
-          </pre>
+          <div className={styles.emailAndGithub}>
+            <div>===========================================================================</div>
+            <div>[+] Email | lofi2505@gmail.com</div>
+            <div>[+] Github |&nbsp;
+              <a
+                href="http://github.com/lofi-J"
+                target="_blank">
+                https://github.com/lofi-J
+              </a>
+            </div>
+            <div>===========================================================================</div>
+          </div>
           <h2 className={styles.subTitle}>Build ASCII Art...</h2>
           <p className={styles.note}>Note:
             <b className={styles.text}>Please choose between Text to ASCII or Image to ASCII</b>

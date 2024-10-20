@@ -61,18 +61,6 @@
   margin-top: 2rem;
 }
 
-@keyframes blink {
-  from {
-    opacity: 0;
-    color: white;
-  }
-  to {
-    opacity: 100;
-    color: gray;
-  }
-}
-
-
 /* 404 page */
 .notFoundContainer {
   display: flex;

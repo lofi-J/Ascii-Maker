@@ -1,16 +1,17 @@
 "use client";
 import React, {ChangeEvent, useEffect, useState} from "react";
-import styles from "./ImgUpload.module.css";
+import styles from "./ImageAscii.module.css";
 import Image from 'next/image';
 import Fieldset from "@/components/Fieldset/Fieldset";
+import BuilderImageAscii from "@/components/BuilderImageAscii/BuilderImageAscii";
 
 
-interface IImageUpload {
-  setImageFile: React.Dispatch<React.SetStateAction<File | null>>;
+interface IImageAscii {
   onLoad: () => void;
 }
 
-const ImgUpload = ({setImageFile, onLoad}: IImageUpload) => {
+const ImageAscii = ({onLoad}: IImageAscii) => {
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isUploaded, setIsUploaded] = useState(false); // for css state
   const [imageDataUrl, setImageDataUrl] = useState<string | null>(null);
   const [isUploadError, setIsUploadError] = useState(false);
@@ -53,7 +54,9 @@ const ImgUpload = ({setImageFile, onLoad}: IImageUpload) => {
             )}
           </div>
           <div className={styles.asciiImage}>
-            ASCII Image
+            <BuilderImageAscii
+              file={imageFile}
+            />
           </div>
         </div>
       </Fieldset>
@@ -61,4 +64,4 @@ const ImgUpload = ({setImageFile, onLoad}: IImageUpload) => {
   );
 }
 
-export default ImgUpload;
+export default ImageAscii;

@@ -1,16 +1,15 @@
 "use client";
 import styles from "./page.module.css";
 import useLoadTime from "@/hooks/useLoadTime";
-import ImgUpload from "@/components/ImgUpload/ImgUpload";
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useEffect} from "react";
+import ImageAscii from "@/components/ImageAscii/ImageAscii";
 
 
 export default function BuildAsciiImage() {
   const {time, incrementLoadCount} = useLoadTime(2);
-  const [uploadedImg, setUploadedImg] = useState<File | null>(null);
-
+  
   useEffect(() => {
-    incrementLoadCount();
+    incrementLoadCount(); // component count
   }, [incrementLoadCount]);
 
   return (
@@ -29,9 +28,8 @@ export default function BuildAsciiImage() {
 
       {/* upload and preview */}
       <div className={styles.upload}>
-        <ImgUpload
-          setImageFile={setUploadedImg}
-          onLoad={incrementLoadCount}
+        <ImageAscii
+          onLoad={incrementLoadCount} // component count
         />
       </div>
 
