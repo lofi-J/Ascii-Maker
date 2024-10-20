@@ -1,14 +1,15 @@
 "use client";
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import styles from "./ImgUpload.module.css";
 import Image from 'next/image';
 
 
 interface IImageUpload {
-  setImageFile: React.Dispatch<React.SetStateAction<File | null>>
+  setImageFile: React.Dispatch<React.SetStateAction<File | null>>;
+  onLoad: () => void;
 }
 
-const ImgUpload = ({setImageFile}: IImageUpload) => {
+const ImgUpload = ({setImageFile, onLoad}: IImageUpload) => {
   const [imageDataUrl, setImageDataUrl] = useState<string | null>(null);
   const [isUploadError, setIsUploadError] = useState(false);
 
@@ -27,6 +28,10 @@ const ImgUpload = ({setImageFile}: IImageUpload) => {
       reader.readAsDataURL(file);
     } else console.error('has no file');
   }
+
+  useEffect(() => {
+    onLoad();
+  }, [onLoad])
 
   return (
     <div className={styles.container}>
