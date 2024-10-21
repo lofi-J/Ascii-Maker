@@ -11,6 +11,10 @@ export default function BuildAsciiImage() {
   const [imageFile, setImageFile] = useState<File | null>(null); // 업로드한 이미지
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
 
+  const reset = () => {
+    setImageFile(null);
+  }
+
   useEffect(() => {
     incrementLoadCount(); // component count
   }, [incrementLoadCount]);
@@ -33,7 +37,7 @@ export default function BuildAsciiImage() {
       {/* Image Upload And Status */}
       <div className={styles.imageAndAscii}>
         {/* image */}
-        <Fieldset title={'Image'} flex={5}>
+        <Fieldset title={'Image'} flex={3}>
           <ImageUploader
             imageFile={imageFile}
             setIsUploadError={setIsUploadError}
@@ -42,7 +46,7 @@ export default function BuildAsciiImage() {
           />
         </Fieldset>
         {/* status */}
-        <Fieldset title={'Status'} flex={2}>
+        <Fieldset title={'Status'} flex={5}>
           <div style={{flex: "1"}}>
             jkl;
           </div>
@@ -53,7 +57,10 @@ export default function BuildAsciiImage() {
 
 
       {/* function buttons */}
-      <div>func buttons</div>
+      <div>
+        func buttons
+        <button onClick={() => reset()}>reset</button>
+      </div>
     </div>
   );
 }
