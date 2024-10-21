@@ -32,7 +32,7 @@ const Status = ({file, status, onLoad}: IStatus) => {
     <div className={styles.container}>
       <div className={styles.row}>
         <span className={styles.title}>
-          <em className={styles.gray}>name: </em>{file ? file.name : 'null'}
+          <em className={styles.gray}>name: </em><span className={styles.fileName}>{file ? file.name : 'null'}</span>
         </span>
       </div>
       <div className={styles.row}>
