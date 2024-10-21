@@ -1,19 +1,23 @@
 "use client";
 import styles from "./page.module.css";
 import useLoadTime from "@/hooks/useLoadTime";
-import {useEffect} from "react";
-import ImageAscii from "@/components/ImageAscii/ImageAscii";
+import React, {useEffect, useState} from "react";
+import ImageUploader from "@/components/ImageUploader/ImageUploader";
+import Fieldset from "@/components/Fieldset/Fieldset";
 
 
 export default function BuildAsciiImage() {
   const {time, incrementLoadCount} = useLoadTime(2);
-  
+  const [imageFile, setImageFile] = useState<File | null>(null); // 업로드한 이미지
+  const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
+
   useEffect(() => {
     incrementLoadCount(); // component count
   }, [incrementLoadCount]);
 
   return (
     <div className={styles.container}>
+
       {/* ready header */}
       <div className={styles.header}>
         ASCII Art Maker <em className={styles.version}>v 1.0</em>
@@ -26,12 +30,27 @@ export default function BuildAsciiImage() {
       {/* covert options */}
       <div>options</div>
 
-      {/* upload and preview */}
-      <div className={styles.upload}>
-        <ImageAscii
-          onLoad={incrementLoadCount} // component count
-        />
+      {/* Image Upload And Status */}
+      <div className={styles.imageAndAscii}>
+        {/* image */}
+        <Fieldset title={'Image'} flex={5}>
+          <ImageUploader
+            imageFile={imageFile}
+            setIsUploadError={setIsUploadError}
+            setImageFile={setImageFile}
+            onLoad={incrementLoadCount}
+          />
+        </Fieldset>
+        {/* status */}
+        <Fieldset title={'Status'} flex={2}>
+          <div style={{flex: "1"}}>
+            jkl;
+          </div>
+        </Fieldset>
       </div>
+
+      {/* Ascii Art */}
+
 
       {/* function buttons */}
       <div>func buttons</div>

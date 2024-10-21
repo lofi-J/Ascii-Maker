@@ -27,3 +27,10 @@
 
 /* covert options */
 
+
+/* Image & Ascii Art */
+.imageAndAscii {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.8rem;
+}
