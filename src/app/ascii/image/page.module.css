@@ -1,5 +1,6 @@
 .container {
-  width: 100%;
+  width: 60rem;
+  margin: 0 auto;
   height: 100vh;
   padding: 1.8rem;
 }
@@ -28,9 +29,20 @@
 /* covert options */
 
 
-/* Image & Ascii Art */
-.imageAndAscii {
+/* Image */
+.image {
   display: flex;
   justify-content: space-between;
   gap: 1.8rem;
+}
+
+/* ASCII Art */
+.asciiArt {
+  display: flex;
+  flex: 1;
+}
+
+/* Functions */
+.functions {
+
 }

@@ -2,7 +2,7 @@
 import styles from "./ImageUploader.module.css";
 import React, {ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import Image from "next/image";
-import { MdOutlineUploadFile } from "react-icons/md";
+import Photo from "../../assets/photo.svg";
 
 
 interface ImageUploader {
@@ -72,7 +72,7 @@ const ImageUploader = ({imageFile, setIsUploadError, setImageFile, onLoad}: Imag
     <div className={styles.uploader}>
       {!imageFile && (
         <div className={styles.support}>
-          <MdOutlineUploadFile size={35} />
+          <Photo className={styles.svg} />
           <strong className={styles.supportText}>Drag and Drop file or Choose file</strong>
         </div>
       )}
