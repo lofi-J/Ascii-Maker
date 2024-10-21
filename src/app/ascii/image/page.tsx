@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
+import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
 
 
 export default function BuildAsciiImage() {
@@ -65,7 +66,7 @@ export default function BuildAsciiImage() {
       {/* Ascii Art */}
       <div className={styles.asciiArt}>
         <Fieldset title="ASCII Art">
-          <>TEST</>
+          <ImageAsciiArt file={imageFile} />
         </Fieldset>
       </div>
 
