@@ -25,7 +25,7 @@
 .userInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   .row {
     font-size: 1.3rem;
     .em {

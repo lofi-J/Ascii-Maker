@@ -7,13 +7,24 @@ import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
 import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
 import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
+import Options from "@/components/Options/Options";
+import {defaultOptions} from "@/modules/ascii/options";
 
+
+export interface IOptions {
+  resolution: { width: number, height: number };
+  asciiChars: string[];
+  brighize: number;
+  lineHtnessWeight: { red: number, green: number, blue: number };
+  fontSeight: number;
+}
 
 export default function BuildAsciiImage() {
-  const {time, incrementLoadCount} = useLoadTime(5);
+  const {time, incrementLoadCount} = useLoadTime(6);
   const [imageFile, setImageFile] = useState<File | null>(null); // 업로드한 이미지
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
+  const [options, setOptions] = useState<IOptions>(defaultOptions);
   
   
   const reset = () => {
@@ -35,7 +46,15 @@ export default function BuildAsciiImage() {
       </div>
 
       {/* covert options */}
-      <div className={styles.options}>options</div>
+      <div className={styles.options}>
+        <Fieldset title={'Options'} flex={1}>
+          <Options
+            onLoad={incrementLoadCount}
+            options={options}
+            setOptions={setOptions}
+          />
+        </Fieldset>
+      </div>
 
       {/* Image Upload And Status */}
       <div className={styles.image}>

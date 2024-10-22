@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    .hr {
+      border: none;
+      margin: 1rem 0;
+    }
+  }
+  .preview {
+    border: 1px dashed var(--color);
+    width: 15rem;
+    height: 15rem;
+  }
+}
+.option {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  .yellow {
+    color: var(--yellow);
+  }
+  .name {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--blue);
+  }
+  .value {
+    margin-left: 1rem;
+    .input {
+      cursor: pointer;
+      color: var(--foreground);
+      padding: 0 0.25rem;
+      width: max-content;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+  }
+}

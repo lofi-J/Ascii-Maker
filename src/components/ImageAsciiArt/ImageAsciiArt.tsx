@@ -7,8 +7,8 @@ import BinaryData from "../../assets/binary-data.svg";
 
 interface IImageAsciiArt {
   file: File | null;
-  setComplete: Dispatch<SetStateAction<boolean>>;
-  onLoad: () => void;
+  setComplete?: Dispatch<SetStateAction<boolean>>;
+  onLoad?: () => void;
 }
 
 const ImageAsciiArt = ({file, setComplete, onLoad}: IImageAsciiArt) => {
@@ -17,12 +17,14 @@ const ImageAsciiArt = ({file, setComplete, onLoad}: IImageAsciiArt) => {
   const inlineStyle: CSSProperties = {
     width: "100%",
     whiteSpace: "pre",
-    lineHeight: "0.5",
+    lineHeight: "1.1",
     fontSize: "1.1rem"
   };
   
   useEffect(() => {
-    onLoad();
+    if (onLoad) {
+      onLoad();
+    }
   }, [onLoad]);
   
   useEffect(() => {
@@ -41,7 +43,7 @@ const ImageAsciiArt = ({file, setComplete, onLoad}: IImageAsciiArt) => {
   }, [file]);
   
   useEffect(() => {
-    if (asciiArt) {
+    if (asciiArt && setComplete) {
       setComplete(true);
     }
   }, [asciiArt, setComplete]);
