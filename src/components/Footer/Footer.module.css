@@ -1,0 +1,28 @@
+.footer {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  width: 60rem;
+  padding: 0 1.8rem 0.4rem;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--background);
+  .row {
+    display: flex;
+    align-items: center;
+    height: 1.6rem;
+    .icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      fill: var(--color);
+    }
+    .text {
+      padding-left: 0.5rem;
+      line-height: 1.6;
+      font-size: 1.6rem;
+    }
+  }
+}
+

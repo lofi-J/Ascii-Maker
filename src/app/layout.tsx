@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Share_Tech_Mono } from "next/font/google";
 import { Ubuntu_Mono } from "next/font/google";
+import Footer from "@/components/Footer/Footer";
 import "./globals.css";
 
 
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${ubuntuMono.className} ${shareTechMono.className}`}>
         {children}
+        <Footer />
       </body>
     </html>
   );

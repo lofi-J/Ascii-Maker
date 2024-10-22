@@ -26,7 +26,6 @@ export default function BuildAsciiImage() {
 
   return (
     <div className={styles.container}>
-
       {/* ready header */}
       <div className={styles.header}>
         <TerminalStatus
@@ -36,7 +35,7 @@ export default function BuildAsciiImage() {
       </div>
 
       {/* covert options */}
-      <div>options</div>
+      <div className={styles.options}>options</div>
 
       {/* Image Upload And Status */}
       <div className={styles.image}>

@@ -1,22 +1,19 @@
 "use client";
 import styles from "./TerminalStatus.module.css";
 import React, {useEffect, useState} from "react";
+import useMemory from "@/hooks/useMemory";
 
 
 interface ITerminalStatus {
   onLoad: () => void;
   loadTime: number | null;
 }
-interface IMemory {
-  usedJSHeapSize: number;
-  totalJSHeapSize: number;
-}
-type TMemoryInfo = {usedSize: number, totalSize: number};
+
 type TUserAgentData = {brands: {brand: string, version: string}[], isMobile: boolean, platform: string};
 
 const TerminalStatus = ({onLoad, loadTime}: ITerminalStatus) => {
-  const [memoryInfo, setMemoryInfo] = useState<TMemoryInfo>();
   const [agentData, setAgentData] = useState<TUserAgentData>();
+  const memoryInfo = useMemory();
   
   useEffect(() => {
     // OS 정보
@@ -32,16 +29,6 @@ const TerminalStatus = ({onLoad, loadTime}: ITerminalStatus) => {
         isMobile: isMobile,
         platform: platform
       })
-    }
-    
-    // Memory 사용량 계산(브라우저에 API 없는경우 초기화 x)
-    const byteToMib = (byte: number) => byte / 1048576;
-    
-    if (typeof window !== 'undefined' && 'memory' in performance) {
-      const memory = performance.memory as IMemory;
-      const usedJSHeap = byteToMib(memory.usedJSHeapSize);
-      const totalJSHeapSize = byteToMib(memory.totalJSHeapSize);
-      setMemoryInfo({usedSize: usedJSHeap, totalSize: totalJSHeapSize});
     }
   }, []);
   

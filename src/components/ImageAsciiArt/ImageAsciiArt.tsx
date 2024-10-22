@@ -1,6 +1,8 @@
 "use client";
+import styles from "./ImageAsciiArt.module.css";
 import generateAsciiImage from "@/modules/ascii/imageToAscii";
 import {CSSProperties, Dispatch, SetStateAction, useEffect, useState} from "react";
+import BinaryData from "../../assets/binary-data.svg";
 
 
 interface IImageAsciiArt {
@@ -18,7 +20,6 @@ const ImageAsciiArt = ({file, setComplete, onLoad}: IImageAsciiArt) => {
     lineHeight: "0.5",
     fontSize: "1.1rem"
   };
-  
   
   useEffect(() => {
     onLoad();
@@ -46,7 +47,13 @@ const ImageAsciiArt = ({file, setComplete, onLoad}: IImageAsciiArt) => {
   }, [asciiArt, setComplete]);
   
   return (
-    <pre style={inlineStyle}>{asciiArt}</pre>
+    <div className={styles.container}>
+      {asciiArt ? (
+        <pre style={inlineStyle}>{asciiArt}</pre>
+      ) : (
+        <BinaryData className={styles.icon} />
+      )}
+    </div>
   );
 }
 
