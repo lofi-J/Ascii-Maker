@@ -1,21 +1,28 @@
 "use client";
 import generateAsciiImage from "@/modules/ascii/imageToAscii";
-import {CSSProperties, useEffect, useState} from "react";
+import {CSSProperties, Dispatch, SetStateAction, useEffect, useState} from "react";
 
 
 interface IImageAsciiArt {
   file: File | null;
+  setComplete: Dispatch<SetStateAction<boolean>>;
+  onLoad: () => void;
 }
 
-const ImageAsciiArt = ({file}: IImageAsciiArt) => {
+const ImageAsciiArt = ({file, setComplete, onLoad}: IImageAsciiArt) => {
   const [asciiArt, setAsciiArt] = useState<string>();
   
   const inlineStyle: CSSProperties = {
     width: "100%",
     whiteSpace: "pre",
     lineHeight: "0.5",
-    fontSize: "1rem"
+    fontSize: "1.1rem"
   };
+  
+  
+  useEffect(() => {
+    onLoad();
+  }, [onLoad]);
   
   useEffect(() => {
     if (!file) return;
@@ -31,6 +38,12 @@ const ImageAsciiArt = ({file}: IImageAsciiArt) => {
     }
     reader.readAsDataURL(file);
   }, [file]);
+  
+  useEffect(() => {
+    if (asciiArt) {
+      setComplete(true);
+    }
+  }, [asciiArt, setComplete]);
   
   return (
     <pre style={inlineStyle}>{asciiArt}</pre>

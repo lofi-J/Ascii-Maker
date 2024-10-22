@@ -17,7 +17,7 @@ const generateAsciiImage = (img: HTMLImageElement) => {
   const {data} = imageData;
   
   // convert
-  const asciiChars = '@%#*+=-:. ';
+  const asciiChars = ['@', '%', '#', '*', '+', '=', '-', ':', '.',' '];
   let asciiStr = '';
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i];

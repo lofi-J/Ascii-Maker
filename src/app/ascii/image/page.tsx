@@ -6,10 +6,11 @@ import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
 import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
+import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
 
 
 export default function BuildAsciiImage() {
-  const {time, incrementLoadCount} = useLoadTime(3);
+  const {time, incrementLoadCount} = useLoadTime(5);
   const [imageFile, setImageFile] = useState<File | null>(null); // 업로드한 이미지
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
@@ -28,11 +29,10 @@ export default function BuildAsciiImage() {
 
       {/* ready header */}
       <div className={styles.header}>
-        ASCII Art Maker <em className={styles.version}>v 1.0</em>
-        <span className={styles.gray}>
-          ready in
-          <em className={styles.em}>{time !== null ? time === 0 ? 0.1 : time.toFixed(3) : '.'} ms</em>
-        </span>
+        <TerminalStatus
+          onLoad={incrementLoadCount}
+          loadTime={time}
+        />
       </div>
 
       {/* covert options */}
@@ -66,7 +66,11 @@ export default function BuildAsciiImage() {
       {/* Ascii Art */}
       <div className={styles.asciiArt}>
         <Fieldset title="ASCII Art">
-          <ImageAsciiArt file={imageFile} />
+          <ImageAsciiArt
+            file={imageFile}
+            setComplete={setConversionCompleted}
+            onLoad={incrementLoadCount}
+          />
         </Fieldset>
       </div>
 

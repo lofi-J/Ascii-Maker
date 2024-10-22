@@ -6,25 +6,7 @@
 }
 
 /* ready header */
-.header {
-  font-size: 1.4rem;
-  color: var(--green);
-  .version {
-    opacity: 0.6;
-    font-weight: bold;
-  }
-  .gray {
-    padding-left: 3rem;
-    font-size: 1.3rem;
-    color: gray;
-    .em {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: var(--foreground);
-      padding-left: 1rem;
-    }
-  }
-}
+
 
 /* covert options */
 
@@ -39,6 +21,7 @@
 /* ASCII Art */
 .asciiArt {
   display: flex;
+  justify-content: center;
   flex: 1;
 }
 
