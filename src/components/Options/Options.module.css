@@ -4,6 +4,7 @@
   flex: 1;
   .options {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 0.6rem;
     .hr {
@@ -19,6 +20,7 @@
 }
 .option {
   display: flex;
+  flex: 1;
   align-items: center;
   font-size: 1.3rem;
   .yellow {
@@ -30,6 +32,10 @@
     color: var(--blue);
   }
   .value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
     margin-left: 1rem;
     .input {
       cursor: pointer;
@@ -39,6 +45,17 @@
       border: none;
       outline: none;
       background-color: transparent;
+    }
+    .text { font-size: 1.4rem; }
+    .row { display: flex; align-items: center; width: 100%; }
+
+    .asciiChars {
+      width: 70%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      letter-spacing: 0.5rem;
+      padding: 0 0.8rem;
     }
   }
 }

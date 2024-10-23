@@ -12,11 +12,11 @@ import {defaultOptions} from "@/modules/ascii/options";
 
 
 export interface IOptions {
-  resolution: { width: number, height: number };
+  resolution: number;
   asciiChars: string[];
-  brighize: number;
-  lineHtnessWeight: { red: number, green: number, blue: number };
-  fontSeight: number;
+  brightnessWeight: { red: number, green: number, blue: number };
+  lineHeight: number;
+  fontSize: number;
 }
 
 export default function BuildAsciiImage() {
@@ -25,8 +25,8 @@ export default function BuildAsciiImage() {
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
   const [options, setOptions] = useState<IOptions>(defaultOptions);
-  
-  
+
+
   const reset = () => {
     setImageFile(null);
   }
