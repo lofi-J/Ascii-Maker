@@ -44,21 +44,26 @@
       cursor: pointer;
       color: var(--foreground);
       padding: 0 0.25rem;
-      width: max-content;
+      width: 100%;
       border: none;
       outline: none;
       background-color: transparent;
     }
     .text { font-size: 1.4rem; }
-    .row { display: flex; align-items: center; width: 100%; }
+    .row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
 
     .asciiChars {
-      width: 50%;
+      width: 80%;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       letter-spacing: 0.5rem;
       padding: 0 0.8rem;
+      font-size: 1.4rem;
     }
   }
 }

@@ -4,6 +4,7 @@ import {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
 import {IOptions} from "@/app/ascii/image/page";
 import InputRange from "@/components/InputRange/InputRange";
 import SelectBox from "@/components/SelectBox/SelectBox";
+import {asciiCharsPreset} from "@/modules/ascii/options";
 
 
 interface IOptionsProps {
@@ -22,11 +23,17 @@ interface IOption {
 }
 
 const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption) => {
-
+  
   const onChangeOptions = (key: typeof optionKey, value: unknown) => {
     setOptions(prev => {
       return {...prev, [key]: value};
     });
+  }
+  
+  const onChangeAsciiChars = (event: ChangeEvent<HTMLInputElement>) => {
+    if (options['asciiChars'].length < 15 || options['asciiChars'].length > event.target.value.length) {
+      onChangeOptions('asciiChars', event.target.value);
+    }
   }
 
   return (
@@ -53,11 +60,14 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
                 className={`${styles.input} ${styles.asciiChars}`}
                 type="text"
                 value={options['asciiChars']}
-                onChange={e => onChangeOptions(optionKey, e.target.value)}
+                onChange={e => onChangeAsciiChars(e)}
               />
               {']'}
             </span>
-            <SelectBox />
+            <SelectBox
+              title={'Presets'}
+              optionList={asciiCharsPreset}
+            />
           </>
         )}
       </span>
