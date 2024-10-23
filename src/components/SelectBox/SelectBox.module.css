@@ -11,6 +11,9 @@
     color: var(--color);
     border: 1px solid var(--color);
     padding: 0.2rem 0.4rem;
+    &:hover {
+      color: darkgrey;
+    }
   }
   .dropdown {
     width: 11rem;

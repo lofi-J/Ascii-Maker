@@ -67,6 +67,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
             <SelectBox
               title={'Presets'}
               optionList={asciiCharsPreset}
+              onChange={(value: string) => onChangeOptions('asciiChars', value)}
             />
           </>
         )}
