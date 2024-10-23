@@ -112,7 +112,6 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
 }
 
 const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
-  console.log(options);
 
   useEffect(() => {
     onLoad();
@@ -152,6 +151,12 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
         <Option
           options={options}
           optionName={'Line height'}
+          setOptions={setOptions}
+          optionKey={'lineHeight'}
+        />
+        <Option
+          options={options}
+          optionName={'Letter spacing'}
           setOptions={setOptions}
           optionKey={'lineHeight'}
         />

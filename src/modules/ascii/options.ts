@@ -17,4 +17,5 @@ export const defaultOptions: IOptions = {
   brightnessWeight: { red: 1, green: 1, blue: 1 },
   lineHeight: 1,
   fontSize: 1,
+  letterSpacing: 1
 }

@@ -17,6 +17,7 @@ export interface IOptions {
   brightnessWeight: { red: number, green: number, blue: number };
   lineHeight: number;
   fontSize: number;
+  letterSpacing: number;
 }
 
 export default function BuildAsciiImage() {
