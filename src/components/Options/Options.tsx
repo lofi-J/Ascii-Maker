@@ -75,6 +75,7 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.options}>
+        <div className={styles.title}>ASCII Generation Options</div>
         <Option
           options={options}
           optionName={'Resolution'}
@@ -94,7 +95,8 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           setOptions={setOptions}
           optionKey={'brightnessWeight'}
         />
-        <hr className={styles.hr} />
+        <hr className={styles.hr}/>
+        <div className={styles.title}>Visual Appearance Options</div>
         <Option
           options={options}
           optionName={'Font size'}
