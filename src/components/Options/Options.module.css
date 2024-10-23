@@ -36,10 +36,14 @@
   }
   .value {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex: 1;
     margin-left: 1rem;
+    .rowWrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+    }
     .input {
       cursor: pointer;
       color: var(--foreground);
@@ -64,6 +68,23 @@
       letter-spacing: 0.5rem;
       padding: 0 0.8rem;
       font-size: 1.4rem;
+    }
+    .brightnessWeight {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      .rgbWrap {
+        display: flex;
+        align-items: center;
+        .rgb {
+          font-size: 1.4rem;
+          margin: 0 1.8rem 0 0.8rem;
+        }
+        .input {
+          width: 5rem;
+          color: var(--color);
+        }
+      }
     }
   }
 }
