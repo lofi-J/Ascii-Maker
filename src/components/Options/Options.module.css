@@ -50,7 +50,7 @@
     .row { display: flex; align-items: center; width: 100%; }
 
     .asciiChars {
-      width: 70%;
+      width: 50%;
       display: flex;
       align-items: center;
       justify-content: flex-start;

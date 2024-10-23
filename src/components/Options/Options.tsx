@@ -3,6 +3,7 @@ import styles from "./Options.module.css";
 import {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
 import {IOptions} from "@/app/ascii/image/page";
 import InputRange from "@/components/InputRange/InputRange";
+import SelectBox from "@/components/SelectBox/SelectBox";
 
 
 interface IOptionsProps {
@@ -19,6 +20,7 @@ interface IOption {
   min?: number;
   max?: number;
 }
+
 const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption) => {
 
   const onChangeOptions = (key: typeof optionKey, value: unknown) => {
@@ -55,7 +57,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
               />
               {']'}
             </span>
-            <button>presets</button>
+            <SelectBox />
           </>
         )}
       </span>

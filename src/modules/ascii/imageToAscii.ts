@@ -1,21 +1,24 @@
 const generateAsciiImage = (img: HTMLImageElement) => {
+  const chars_ = '@%#*+=-:. '.split('');
+  console.log(chars_);
+
   const canvas = document.createElement('canvas'); // js로 캔버스 생성
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  
+
   // set canvas size
   const width = 100;
   const height = Math.floor((img.width / img.height) * width);
   canvas.width = width;
   canvas.height = height;
-  
+
   // draw
   ctx.drawImage(img, 0, 0, width, height);
-  
+
   // get data
   const imageData = ctx.getImageData(0, 0, width, height);
   const {data} = imageData;
-  
+
   // convert
   const asciiChars = ['@', '%', '#', '*', '+', '=', '-', ':', '.',' '];
   let asciiStr = '';

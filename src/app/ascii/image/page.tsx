@@ -13,7 +13,7 @@ import {defaultOptions} from "@/modules/ascii/options";
 
 export interface IOptions {
   resolution: number;
-  asciiChars: string[];
+  asciiChars: string;
   brightnessWeight: { red: number, green: number, blue: number };
   lineHeight: number;
   fontSize: number;
