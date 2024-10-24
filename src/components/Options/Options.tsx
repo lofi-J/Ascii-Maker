@@ -149,7 +149,7 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Resolution'}
           setOptions={setOptions}
           optionKey={'resolution'}
-          min={100} max={3000} step={10}
+          min={50} max={500} step={10}
         />
         <Option
           options={options}
@@ -179,9 +179,9 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Line height'}
           setOptions={setOptions}
           optionKey={'lineHeight'}
-          min={5}
-          max={20}
-          step={1}
+          min={0.1}
+          max={3}
+          step={0.1}
         />
         <Option
           options={options}

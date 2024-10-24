@@ -1,7 +1,7 @@
 .container {
   width: 60rem;
   margin: 0 auto 10rem;
-  height: 100vh;
+  height: auto;
   padding: 1.8rem;
 }
 
@@ -31,5 +31,5 @@
 .asciiArt {
   display: flex;
   justify-content: center;
-  flex: 1;
+  align-items: flex-start;
 }

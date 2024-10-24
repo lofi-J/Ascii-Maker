@@ -21,11 +21,12 @@ export const defaultOptions: IOptions = {
   resolution: 100,
   asciiChars: '@%#*+=-:. ',
   brightnessWeight: { red: 1, green: 1, blue: 1 },
-  lineHeight: 10,
-  fontSize: 10,
+  lineHeight: 0.8,
+  fontSize: 8,
   letterSpacing: 1
 }
 
+// TODO
 export const validOptions = (options: IOptions) => {
   // TODO 여러 테스트를 하며 로직 추가 예정
   console.log(options);

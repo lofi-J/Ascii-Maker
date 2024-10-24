@@ -95,6 +95,7 @@ export default function BuildAsciiImage() {
             file={imageFile}
             setComplete={setConversionCompleted}
             onLoad={incrementLoadCount}
+            options={options}
           />
         </Fieldset>
       </div>
