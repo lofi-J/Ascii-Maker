@@ -9,11 +9,11 @@ export interface IOptions {
 
 export const asciiCharsPreset = [
   {name: 'Default', value: '@%#*+=-:. '},
+  {name: 'Binary', value: '01 '},
   {name: 'Detail', value: "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`\\'. "},
   {name: 'High Contrast', value: "@#S%?*+;:,. "},
   {name: 'Medium Contrast', value: "#8XOHLTI!;: "},
   {name: 'Bold', value: "MWNXK0Okxdolc:;,. "},
-  {name: 'Minimal', value: "#¥±=+~-. "},
   {name: 'Simple', value: "#%*+=-:. "},
 ]
 
@@ -26,9 +26,19 @@ export const defaultOptions: IOptions = {
   letterSpacing: 1
 }
 
-// TODO
-export const validOptions = (options: IOptions) => {
-  // TODO 여러 테스트를 하며 로직 추가 예정
-  console.log(options);
-  return {value: true, status: ''};
+export const limitOptionValue = {
+  resolution: {min: 50, max: 500},
+  brightnessWeight: {min: 0.1, max: 1},
+  fontSize: {min: 5, max: 20},
+  lineHeight: {min: 0.1, max: 3},
+  letterSpacing: {min: 0.1, max: 10},
+}
+
+export interface IValidOptionsResult {
+  isPass: boolean;
+  warringList: string[];
+}
+export const validOptions = (options: IOptions): IValidOptionsResult => {
+  
+  return {isPass: true, warringList: ['']};
 }

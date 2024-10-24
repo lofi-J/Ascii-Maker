@@ -3,7 +3,7 @@ import styles from "./Options.module.css";
 import {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
 import InputRange from "@/components/InputRange/InputRange";
 import SelectBox from "@/components/SelectBox/SelectBox";
-import {asciiCharsPreset, defaultOptions, IOptions} from "@/modules/ascii/options";
+import {asciiCharsPreset, defaultOptions, IOptions, limitOptionValue as LOV} from "@/modules/ascii/options";
 import Undo from "../../assets/undo.svg";
 
 
@@ -83,7 +83,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
                 type="number"
                 value={options['brightnessWeight'].red}
                 onChange={(event) => onChangeBrightnessWeight(event, 'red')}
-                min={0.1} max={1} step={0.1}
+                min={min} max={max} step={0.1}
               />]
             </span>
             <span className={styles.rgbWrap}>
@@ -93,7 +93,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
                 type="number"
                 value={options['brightnessWeight'].green}
                 onChange={(event) => onChangeBrightnessWeight(event, 'green')}
-                min={0.1} max={1} step={0.1}
+                min={min} max={max} step={0.1}
               />]
             </span>
             <span className={styles.rgbWrap}>
@@ -103,7 +103,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
                 type="number"
                 value={options['brightnessWeight'].blue}
                 onChange={(event) => onChangeBrightnessWeight(event, 'blue')}
-                min={0.1} max={1} step={0.1}
+                min={min} max={max} step={0.1}
               />]
             </span>
           </div>
@@ -149,7 +149,7 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Resolution'}
           setOptions={setOptions}
           optionKey={'resolution'}
-          min={50} max={500} step={10}
+          min={LOV.resolution.min} max={LOV.resolution.max} step={10}
         />
         <Option
           options={options}
@@ -162,6 +162,8 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Brightness Weight'}
           setOptions={setOptions}
           optionKey={'brightnessWeight'}
+          min={LOV.brightnessWeight.min}
+          max={LOV.brightnessWeight.max}
         />
         <hr className={styles.hr}/>
         <div className={styles.title}>Visual Appearance Options</div>
@@ -170,8 +172,8 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Font size'}
           setOptions={setOptions}
           optionKey={'fontSize'}
-          min={5}
-          max={20}
+          min={LOV.fontSize.min}
+          max={LOV.fontSize.max}
           step={1}
         />
         <Option
@@ -179,8 +181,8 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Line height'}
           setOptions={setOptions}
           optionKey={'lineHeight'}
-          min={0.1}
-          max={3}
+          min={LOV.lineHeight.min}
+          max={LOV.lineHeight.max}
           step={0.1}
         />
         <Option
@@ -188,8 +190,8 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Letter spacing'}
           setOptions={setOptions}
           optionKey={'letterSpacing'}
-          min={0.1}
-          max={10}
+          min={LOV.letterSpacing.min}
+          max={LOV.letterSpacing.max}
           step={0.1}
         />
       </div>

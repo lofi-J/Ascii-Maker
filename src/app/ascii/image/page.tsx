@@ -8,7 +8,7 @@ import Status from "@/components/Status/Status";
 import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
 import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
 import Options from "@/components/Options/Options";
-import {defaultOptions, IOptions, validOptions} from "@/modules/ascii/options";
+import {defaultOptions, IOptions, IValidOptionsResult, validOptions} from "@/modules/ascii/options";
 
 
 export default function BuildAsciiImage() {
@@ -17,7 +17,7 @@ export default function BuildAsciiImage() {
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
   const [options, setOptions] = useState<IOptions>(defaultOptions);
-  const [optionsValid, setOptionsValid] = useState({value: true, status: ''});
+  const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []});
 
 
   const reset = () => {
@@ -71,7 +71,7 @@ export default function BuildAsciiImage() {
             onLoad={incrementLoadCount}
             file={imageFile || undefined}
             status={[
-              {key: 'Option Integrity Check', status: optionsValid.value ? 'success' : 'failed'},
+              {key: 'Option Integrity Check', status: optionsValid.isPass ? 'success' : 'failed'},
               {key: 'Image Uploaded', status: !imageFile ? 'processing' : isUploadError ? 'failed' : 'success'},
               {key: 'Ready for Conversion', status: isUploadError ? 'failed' : imageFile ? 'success' : 'processing'},
               {key: 'Conversion Complete?', status: conversionCompleted ? 'success' : 'processing'},
