@@ -1,6 +1,6 @@
 .container {
   width: 60rem;
-  margin: 0 auto;
+  margin: 0 auto 10rem;
   height: 100vh;
   padding: 1.8rem;
 }
@@ -22,14 +22,14 @@
   gap: 1.2rem;
 }
 
+/* Functions */
+.functions {
+
+}
+
 /* ASCII Art */
 .asciiArt {
   display: flex;
   justify-content: center;
   flex: 1;
-}
-
-/* Functions */
-.functions {
-
 }

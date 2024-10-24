@@ -1,16 +1,16 @@
 import styles from "./Status.module.css";
-import {ReactNode, useEffect} from "react";
+import {useEffect} from "react";
 
 
 type status = 'processing' | 'success' | 'failed';
 interface IStatus {
   file: File | undefined;
-  status: {key: string, value: ReactNode, status: status}[];
+  status: {key: string, status: status}[];
   onLoad: () => void;
 }
 
 const Status = ({file, status, onLoad}: IStatus) => {
-  
+
   const getEmoji = (status: status) => {
     switch (status) {
       case "processing":
@@ -21,13 +21,13 @@ const Status = ({file, status, onLoad}: IStatus) => {
         return <b className={styles.fail}>❌</b>
     }
   }
-  
+
   const byteToKB = (byte: number) => (byte / 1024).toFixed(2);
-  
+
   useEffect(() => {
     onLoad();
   }, [onLoad]);
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -48,7 +48,7 @@ const Status = ({file, status, onLoad}: IStatus) => {
       {status.map((item, i) => (
         <div key={`status-${i}`} className={styles.row}>
           {getEmoji(item.status)}
-          <span className={styles.title}>{item.key}</span> <span className={styles.value}>{item.value}</span>
+          <span className={styles.title}>{item.key}</span>
         </div>
       ))}
     </div>

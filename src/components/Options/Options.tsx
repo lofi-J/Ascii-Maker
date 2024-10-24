@@ -1,10 +1,10 @@
 "use client";
 import styles from "./Options.module.css";
 import {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
-import {IOptions} from "@/app/ascii/image/page";
 import InputRange from "@/components/InputRange/InputRange";
 import SelectBox from "@/components/SelectBox/SelectBox";
-import {asciiCharsPreset} from "@/modules/ascii/options";
+import {asciiCharsPreset, defaultOptions, IOptions} from "@/modules/ascii/options";
+import Undo from "../../assets/undo.svg";
 
 
 interface IOptionsProps {
@@ -127,6 +127,10 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
 
 const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
 
+  const optionReset = () => {
+    setOptions(defaultOptions);
+  }
+
   useEffect(() => {
     onLoad();
   }, [onLoad]);
@@ -134,13 +138,18 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.options}>
-        <div className={styles.title}>ASCII Generation Options</div>
+        <div className={styles.optionHeader}>
+          <div className={styles.title}>ASCII Generation Options</div>
+          <button className={styles.optionReset} onClick={optionReset}>
+            <Undo className={styles.resetSVG} />
+          </button>
+        </div>
         <Option
           options={options}
           optionName={'Resolution'}
           setOptions={setOptions}
           optionKey={'resolution'}
-          min={10} max={300}
+          min={100} max={3000} step={10}
         />
         <Option
           options={options}
