@@ -1,5 +1,6 @@
 import styles from "./Status.module.css";
 import {useEffect} from "react";
+import {IValidOptionsResult} from "@/modules/ascii/options";
 
 
 type status = 'processing' | 'success' | 'failed';
@@ -7,9 +8,10 @@ interface IStatus {
   file: File | undefined;
   status: {key: string, status: status}[];
   onLoad: () => void;
+  warringList: IValidOptionsResult["warringList"];
 }
 
-const Status = ({file, status, onLoad}: IStatus) => {
+const Status = ({file, status, onLoad, warringList}: IStatus) => {
 
   const getEmoji = (status: status) => {
     switch (status) {
@@ -51,6 +53,19 @@ const Status = ({file, status, onLoad}: IStatus) => {
           <span className={styles.title}>{item.key}</span>
         </div>
       ))}
+      
+      {!!warringList.length && (
+        <ul className={styles.warring}>
+          {warringList.map((item, i) => (
+            <li
+              className={`${styles.text} ${item.case === 'warring' ? styles.warringCase : styles.errorCase}`}
+              key={`warring-list-${i}`}
+            >
+              {item.text}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function BuildAsciiImage() {
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
   const [options, setOptions] = useState<IOptions>(defaultOptions);
-  const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []});
+  const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []}); // option 검사결과
 
 
   const reset = () => {
@@ -76,6 +76,7 @@ export default function BuildAsciiImage() {
               {key: 'Ready for Conversion', status: isUploadError ? 'failed' : imageFile ? 'success' : 'processing'},
               {key: 'Conversion Complete?', status: conversionCompleted ? 'success' : 'processing'},
             ]}
+            warringList={optionsValid.warringList}
           />
         </Fieldset>
       </div>

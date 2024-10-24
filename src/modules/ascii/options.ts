@@ -28,7 +28,7 @@ export const defaultOptions: IOptions = {
 
 export const limitOptionValue = {
   resolution: {min: 50, max: 500},
-  brightnessWeight: {min: 0.1, max: 1},
+  brightnessWeight: {min: 0, max: 1},
   fontSize: {min: 5, max: 20},
   lineHeight: {min: 0.1, max: 3},
   letterSpacing: {min: 0.1, max: 10},
@@ -36,9 +36,29 @@ export const limitOptionValue = {
 
 export interface IValidOptionsResult {
   isPass: boolean;
-  warringList: string[];
+  warringList: {case: 'warring' | 'error', text: string}[];
 }
 export const validOptions = (options: IOptions): IValidOptionsResult => {
+  let isPass = true;
+  const warringList: IValidOptionsResult["warringList"] = [];
   
-  return {isPass: true, warringList: ['']};
+  // warring condition
+  if (options.resolution >= 400) {
+    warringList.push({case: 'warring', text: "Selecting a high resolution can increase memory usage and lead to performance degradation."});
+  }
+  
+  const zeroWeights = [
+    options.brightnessWeight.red === 0,
+    options.brightnessWeight.green === 0,
+    options.brightnessWeight.blue === 0
+  ];
+  const zeroCount = zeroWeights.filter(Boolean).length;
+  if (zeroCount >= 1 && zeroCount < 3) {
+    warringList.push({case: 'warring', text: "Some brightness weights are set to zero, which could affect the image conversion accuracy."});
+  } else if (zeroCount === 3) {
+    isPass = false;
+    warringList.push({case: 'error', text: "Brightness weights cannot be all set to zero. Please adjust the values to ensure proper brightness calculation."});
+  }
+  
+  return {isPass: isPass, warringList: warringList};
 }
