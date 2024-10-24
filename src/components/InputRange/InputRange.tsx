@@ -11,7 +11,7 @@ interface InputRangeProps {
 }
 
 const InputRange = ({value, step, min, max, onChange}: InputRangeProps) => {
-  const currWidth = (value / (max - min) * 100) -3;
+  const currWidth = ((value - min) / (max - min) * 100);
 
   const lineStyle: CSSProperties = {
     width: `${currWidth}%`,

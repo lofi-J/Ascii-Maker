@@ -20,23 +20,25 @@ interface IOption {
   optionKey: keyof IOptions;
   min?: number;
   max?: number;
+  step?: number;
 }
 
-const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption) => {
-  
+const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IOption) => {
+  const isOnlyNumber = ['fontSize', 'lineHeight', 'letterSpacing'].includes(optionKey);
   const onChangeOptions = (key: typeof optionKey, value: unknown) => {
     setOptions(prev => {
       return {...prev, [key]: value};
     });
   }
-  
+
   const onChangeAsciiChars = (event: ChangeEvent<HTMLInputElement>) => {
     if (options['asciiChars'].length <= 100 || options['asciiChars'].length > event.target.value.length) {
       onChangeOptions('asciiChars', event.target.value);
     }
   }
   const onChangeBrightnessWeight = (event: ChangeEvent<HTMLInputElement>, rgb: 'red' | 'green' | 'blue') => {
-    onChangeOptions('brightnessWeight', {...options.brightnessWeight, [rgb]: Number(event.target.value)});
+    const value = Number(event.target.value);
+    onChangeOptions('brightnessWeight', {...options.brightnessWeight, [rgb]: value > 1 ? 1 : value});
   }
 
   return (
@@ -48,8 +50,8 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
             <span className={styles.text}>{options['resolution']}</span>
             <InputRange
               value={options['resolution']}
-              min={10}
-              max={300}
+              min={min}
+              max={max}
               step={5}
               onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeOptions('resolution', parseInt((e.target as HTMLInputElement).value))}
             />
@@ -57,14 +59,14 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
         )}
         {optionKey === "asciiChars" && (
           <div className={styles.rowWrap}>
-            <span className={styles.row}>
-              [<input
+            <span className={styles.row}>[
+              <input
                 className={`${styles.input} ${styles.asciiChars}`}
                 type="text"
                 value={options['asciiChars']}
                 onChange={e => onChangeAsciiChars(e)}
-              />]
-            </span>
+              />
+            ]</span>
             <SelectBox
               title={'Presets'}
               optionList={asciiCharsPreset}
@@ -104,6 +106,18 @@ const Option = ({options, optionName, setOptions, optionKey, min, max}: IOption)
                 min={0.1} max={1} step={0.1}
               />]
             </span>
+          </div>
+        )}
+        {isOnlyNumber && (!!min && !!max) && (
+          <div className={styles.rowWrap}>
+            <span className={styles.text}>{options[optionKey] as string}</span>
+            <InputRange
+              value={options[optionKey] as number}
+              min={min}
+              max={max}
+              step={step || 1}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeOptions(optionKey, Number((e.target as HTMLInputElement).value))}
+            />
           </div>
         )}
       </span>
@@ -147,18 +161,27 @@ const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
           optionName={'Font size'}
           setOptions={setOptions}
           optionKey={'fontSize'}
+          min={5}
+          max={20}
+          step={1}
         />
         <Option
           options={options}
           optionName={'Line height'}
           setOptions={setOptions}
           optionKey={'lineHeight'}
+          min={5}
+          max={20}
+          step={1}
         />
         <Option
           options={options}
           optionName={'Letter spacing'}
           setOptions={setOptions}
-          optionKey={'lineHeight'}
+          optionKey={'letterSpacing'}
+          min={0.1}
+          max={10}
+          step={0.1}
         />
       </div>
     </div>
