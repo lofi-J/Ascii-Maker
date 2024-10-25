@@ -9,6 +9,7 @@ import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
 import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
 import Options from "@/components/Options/Options";
 import {defaultOptions, IOptions, IValidOptionsResult, validOptions} from "@/modules/ascii/options";
+import Button from "@/components/Button/Button";
 
 
 export default function BuildAsciiImage() {
@@ -22,6 +23,7 @@ export default function BuildAsciiImage() {
 
   const reset = () => {
     setImageFile(null);
+    setOptions(defaultOptions);
   }
 
   // option validation
@@ -84,8 +86,32 @@ export default function BuildAsciiImage() {
       {/* function buttons */}
       <div className={styles.functions}>
         <Fieldset title="Function Buttons">
-          <button onClick={() => reset()}>reset</button>
-          <button>option reset</button>
+          <div className={styles.btnWrap}>
+            <Button
+              text={'Generate ASCII Art'}
+              onClick={() => {}}
+              disabled={!optionsValid.isPass}
+            />
+            <Button
+              text={'Clipboard Copy'}
+              onClick={() => {}}
+              disabled={conversionCompleted}
+            />
+            <Button
+              text={'Edit Mode'}
+              onClick={() => {}}
+              disabled={conversionCompleted}
+            />
+            <Button
+              text={'Export PNG'}
+              onClick={() => {}}
+              disabled={conversionCompleted}
+            />
+            <Button
+              text={'Reset'}
+              onClick={reset}
+            />
+          </div>
         </Fieldset>
       </div>
 

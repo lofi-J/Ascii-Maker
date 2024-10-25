@@ -15,7 +15,7 @@ interface IImageAsciiArt {
 
 const ImageAsciiArt = ({file, setComplete, onLoad, options}: IImageAsciiArt) => {
   const [asciiArt, setAsciiArt] = useState<string>();
-  
+
   const inlineStyle: CSSProperties = {
     width: "100%",
     whiteSpace: "pre",
@@ -23,16 +23,19 @@ const ImageAsciiArt = ({file, setComplete, onLoad, options}: IImageAsciiArt) => 
     fontSize: `${options.fontSize * 0.1}rem`,
     letterSpacing: `${options.letterSpacing * 0.1}rem`,
   };
-  
+
   useEffect(() => {
     if (onLoad) {
       onLoad();
     }
   }, [onLoad]);
-  
+
   useEffect(() => {
-    if (!file) return;
-    
+    if (!file) {
+      setAsciiArt(undefined);
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
@@ -44,13 +47,13 @@ const ImageAsciiArt = ({file, setComplete, onLoad, options}: IImageAsciiArt) => 
     }
     reader.readAsDataURL(file);
   }, [file, options]);
-  
+
   useEffect(() => {
     if (asciiArt && setComplete) {
       setComplete(true);
     }
   }, [asciiArt, setComplete]);
-  
+
   return (
     <div className={styles.container}>
       {asciiArt ? (
