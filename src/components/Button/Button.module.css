@@ -2,15 +2,18 @@
   border: 0.1em solid var(--foreground);
   padding: 0.2rem;
   background-color: var(--background);
+  .button {
+    font-weight: bold;
+    background-color: var(--retro-gray);
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+.activeButtonWrap {
   &:hover {
     border-color: var(--retro-gray);
     .button {
       background-color: darkgray;
     }
-  }
-  .button {
-    font-weight: bold;
-    background-color: var(--retro-gray);
-    padding: 0.2rem 0.4rem;
   }
 }

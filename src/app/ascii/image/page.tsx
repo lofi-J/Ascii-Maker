@@ -10,6 +10,7 @@ import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
 import Options from "@/components/Options/Options";
 import {defaultOptions, IOptions, IValidOptionsResult, validOptions} from "@/modules/ascii/options";
 import Button from "@/components/Button/Button";
+import generateAsciiImage from "@/modules/ascii/imageToAscii";
 
 
 export default function BuildAsciiImage() {
@@ -19,11 +20,29 @@ export default function BuildAsciiImage() {
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
   const [options, setOptions] = useState<IOptions>(defaultOptions);
   const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []}); // option 검사결과
-
+  const [asciiArt, setAsciiArt] = useState<string>(); // ASCII Art
+  
+  console.log(imageFile);
 
   const reset = () => {
     setImageFile(null);
     setOptions(defaultOptions);
+    setConversionCompleted(false);
+  }
+  
+  const generateASCII = () => {
+    if (!imageFile) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.src = e.target?.result as string;
+      img.onload = () => {
+        const ascii = generateAsciiImage(img, options);
+        setAsciiArt(ascii || '');
+      }
+    }
+    reader.readAsDataURL(imageFile);
   }
 
   // option validation
@@ -89,23 +108,23 @@ export default function BuildAsciiImage() {
           <div className={styles.btnWrap}>
             <Button
               text={'Generate ASCII Art'}
-              onClick={() => {}}
-              disabled={!optionsValid.isPass}
+              onClick={generateASCII}
+              disabled={(!optionsValid.isPass) || (!imageFile)}
             />
             <Button
               text={'Clipboard Copy'}
               onClick={() => {}}
-              disabled={conversionCompleted}
+              disabled={!conversionCompleted}
             />
             <Button
               text={'Edit Mode'}
               onClick={() => {}}
-              disabled={conversionCompleted}
+              disabled={!conversionCompleted}
             />
             <Button
               text={'Export PNG'}
               onClick={() => {}}
-              disabled={conversionCompleted}
+              disabled={!conversionCompleted}
             />
             <Button
               text={'Reset'}
@@ -119,7 +138,7 @@ export default function BuildAsciiImage() {
       <div className={styles.asciiArt}>
         <Fieldset title="ASCII Art">
           <ImageAsciiArt
-            file={imageFile}
+            asciiArt={asciiArt}
             setComplete={setConversionCompleted}
             onLoad={incrementLoadCount}
             options={options}

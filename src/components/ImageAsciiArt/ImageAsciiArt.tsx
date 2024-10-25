@@ -1,20 +1,19 @@
 "use client";
 import styles from "./ImageAsciiArt.module.css";
-import generateAsciiImage from "@/modules/ascii/imageToAscii";
-import {CSSProperties, Dispatch, SetStateAction, useEffect, useState} from "react";
+import {CSSProperties, Dispatch, SetStateAction, useEffect} from "react";
 import BinaryData from "../../assets/binary-data.svg";
 import {IOptions} from "@/modules/ascii/options";
 
 
 interface IImageAsciiArt {
-  file: File | null;
   setComplete?: Dispatch<SetStateAction<boolean>>;
   onLoad?: () => void;
   options: IOptions;
+  asciiArt: string | undefined;
 }
 
-const ImageAsciiArt = ({file, setComplete, onLoad, options}: IImageAsciiArt) => {
-  const [asciiArt, setAsciiArt] = useState<string>();
+const ImageAsciiArt = ({asciiArt, setComplete, onLoad, options}: IImageAsciiArt) => {
+  
 
   const inlineStyle: CSSProperties = {
     width: "100%",
@@ -29,24 +28,7 @@ const ImageAsciiArt = ({file, setComplete, onLoad, options}: IImageAsciiArt) => 
       onLoad();
     }
   }, [onLoad]);
-
-  useEffect(() => {
-    if (!file) {
-      setAsciiArt(undefined);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.src = e.target?.result as string;
-      img.onload = () => {
-        const ascii = generateAsciiImage(img, options);
-        setAsciiArt(ascii || '');
-      }
-    }
-    reader.readAsDataURL(file);
-  }, [file, options]);
+  
 
   useEffect(() => {
     if (asciiArt && setComplete) {

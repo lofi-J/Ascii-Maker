@@ -9,7 +9,7 @@ interface IButton {
 
 const Button = ({text, onClick, disabled = false}: IButton) => {
   return (
-    <div className={styles.buttonWrap}>
+    <div className={`${styles.buttonWrap} ${!disabled && styles.activeButtonWrap}`}>
       <button
         className={styles.button}
         disabled={disabled}
