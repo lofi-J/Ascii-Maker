@@ -1,4 +1,5 @@
 .buttonWrap {
+  cursor: unset;
   border: 0.1em solid var(--foreground);
   padding: 0.2rem;
   background-color: var(--background);
@@ -10,9 +11,11 @@
 }
 
 .activeButtonWrap {
+  cursor: pointer;
   &:hover {
     border-color: var(--retro-gray);
     .button {
+      cursor: pointer;
       background-color: darkgray;
     }
   }

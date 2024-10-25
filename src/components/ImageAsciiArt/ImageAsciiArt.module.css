@@ -1,11 +1,24 @@
 .container {
+  position: relative;
   display: flex;
   justify-content: center;
   flex: 1;
   text-align: center;
+  min-height: 4rem;
   .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 4rem;
     height: 4rem;
     fill: var(--color);
+  }
+  .pre[contenteditable="true"] {
+    outline: none;
+    border: 1px solid var(--blue);
+  }
+  .pre {
+    background-color: var(--background);
   }
 }

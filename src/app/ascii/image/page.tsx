@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import useLoadTime from "@/hooks/useLoadTime";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
@@ -11,6 +11,7 @@ import Options from "@/components/Options/Options";
 import {defaultOptions, IOptions, IValidOptionsResult, validOptions} from "@/modules/ascii/options";
 import Button from "@/components/Button/Button";
 import generateAsciiImage from "@/modules/ascii/imageToAscii";
+import downloadPNG from "@/modules/ascii/downloadPNG";
 
 
 export default function BuildAsciiImage() {
@@ -20,17 +21,31 @@ export default function BuildAsciiImage() {
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
   const [options, setOptions] = useState<IOptions>(defaultOptions);
   const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []}); // option 검사결과
-  const [asciiArt, setAsciiArt] = useState<string>(); // ASCII Art
+  const asciiRef = useRef<HTMLPreElement>(null); // ASCII Art string
+  const [editMode, setEditMode] = useState(false);
   
-  console.log(imageFile);
 
   const reset = () => {
     setImageFile(null);
     setOptions(defaultOptions);
     setConversionCompleted(false);
+    setEditMode(false);
+    if (asciiRef.current) {
+      asciiRef.current.innerText = '';
+    }
   }
   
-  const generateASCII = () => {
+  const copyClipboard = async () => {
+    if (!asciiRef.current) return;
+    try {
+      await navigator.clipboard.writeText(asciiRef.current.innerText);
+      alert("Copied to clipboard");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  const generateASCII = useCallback(() => {
     if (!imageFile) return;
     
     const reader = new FileReader();
@@ -39,11 +54,17 @@ export default function BuildAsciiImage() {
       img.src = e.target?.result as string;
       img.onload = () => {
         const ascii = generateAsciiImage(img, options);
-        setAsciiArt(ascii || '');
+        
+        if (asciiRef.current) {
+          asciiRef.current.innerText = ascii || '';
+          if (ascii && ascii.length) {
+            setConversionCompleted(true);
+          }
+        }
       }
     }
     reader.readAsDataURL(imageFile);
-  }
+  }, [options, imageFile])
 
   // option validation
   useEffect(() => {
@@ -113,21 +134,21 @@ export default function BuildAsciiImage() {
             />
             <Button
               text={'Clipboard Copy'}
-              onClick={() => {}}
+              onClick={copyClipboard}
               disabled={!conversionCompleted}
             />
             <Button
               text={'Edit Mode'}
-              onClick={() => {}}
+              onClick={() => setEditMode(prev => !prev)}
               disabled={!conversionCompleted}
             />
             <Button
               text={'Export PNG'}
-              onClick={() => {}}
+              onClick={() => downloadPNG(asciiRef, `ascii-${imageFile?.name}`)}
               disabled={!conversionCompleted}
             />
             <Button
-              text={'Reset'}
+              text={'Reset All'}
               onClick={reset}
             />
           </div>
@@ -138,10 +159,11 @@ export default function BuildAsciiImage() {
       <div className={styles.asciiArt}>
         <Fieldset title="ASCII Art">
           <ImageAsciiArt
-            asciiArt={asciiArt}
-            setComplete={setConversionCompleted}
+            asciiRef={asciiRef}
+            conversionCompleted={conversionCompleted}
             onLoad={incrementLoadCount}
             options={options}
+            editMode={editMode}
           />
         </Fieldset>
       </div>
