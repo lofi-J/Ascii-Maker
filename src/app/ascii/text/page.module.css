@@ -1,3 +1,23 @@
 .container {
-  border: 1px solid var(--foreground);
+  width: 60rem;
+  margin: 0 auto 10rem;
+  height: auto;
+  padding: 1.8rem;
+}
+
+/* ready header */
+.header {
+  margin-top: 4rem;
+}
+
+/* covert options */
+.options {
+  margin-top: 5rem;
+}
+
+/* ascii art */
+.asciiArt {
+  .pre {
+    color: var(--color);
+  }
 }

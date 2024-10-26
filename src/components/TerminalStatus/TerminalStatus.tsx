@@ -2,19 +2,20 @@
 import styles from "./TerminalStatus.module.css";
 import React, {useEffect, useState} from "react";
 import useMemory from "@/hooks/useMemory";
+import Link from "next/link";
 
 
 interface ITerminalStatus {
-  onLoad: () => void;
   loadTime: number | null;
+  type: string;
 }
 
 type TUserAgentData = {brands: {brand: string, version: string}[], isMobile: boolean, platform: string};
 
-const TerminalStatus = ({onLoad, loadTime}: ITerminalStatus) => {
+const TerminalStatus = ({loadTime, type}: ITerminalStatus) => {
   const [agentData, setAgentData] = useState<TUserAgentData>();
   const memoryInfo = useMemory();
-  
+
   useEffect(() => {
     // OS 정보
     if (typeof window !== 'undefined' && window.navigator) {
@@ -31,15 +32,14 @@ const TerminalStatus = ({onLoad, loadTime}: ITerminalStatus) => {
       })
     }
   }, []);
-  
-  useEffect(() => {
-    onLoad();
-  }, [onLoad]);
-  
+
+
   return (
     <div className={styles.container}>
       <div className={styles.appVersion}>
-        ASCII Art Maker <em className={styles.version}>v 1.0</em>
+        <Link href={"/"}>
+          ASCII Art Maker [{type}]<em className={styles.version}>v 1.0</em>
+        </Link>
         <span className={styles.gray}>
           ready in
           <em className={styles.em}>{loadTime !== null ? loadTime === 0 ? 0.1 : loadTime.toFixed(3) : '.'} ms</em>
@@ -68,6 +68,6 @@ const TerminalStatus = ({onLoad, loadTime}: ITerminalStatus) => {
       </div>
     </div>
   );
-}
+};
 
 export default TerminalStatus;

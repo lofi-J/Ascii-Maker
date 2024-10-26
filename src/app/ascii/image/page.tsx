@@ -15,7 +15,7 @@ import downloadPNG from "@/modules/ascii/downloadPNG";
 
 
 export default function BuildAsciiImage() {
-  const {time, incrementLoadCount} = useLoadTime(6);
+  const {time, incrementLoadCount} = useLoadTime(5);
   const [imageFile, setImageFile] = useState<File | null>(null); // 업로드한 이미지
   const [isUploadError, setIsUploadError] = useState(false); // 이미지 업로드 에러 여부
   const [conversionCompleted, setConversionCompleted] = useState(false); // image to ascii 완료 상태
@@ -23,7 +23,7 @@ export default function BuildAsciiImage() {
   const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []}); // option 검사결과
   const asciiRef = useRef<HTMLPreElement>(null); // ASCII Art string
   const [editMode, setEditMode] = useState(false);
-  
+
 
   const reset = () => {
     setImageFile(null);
@@ -34,7 +34,7 @@ export default function BuildAsciiImage() {
       asciiRef.current.innerText = '';
     }
   }
-  
+
   const copyClipboard = async () => {
     if (!asciiRef.current) return;
     try {
@@ -44,17 +44,17 @@ export default function BuildAsciiImage() {
       console.error(error);
     }
   }
-  
+
   const generateASCII = useCallback(() => {
     if (!imageFile) return;
-    
+
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
       img.src = e.target?.result as string;
       img.onload = () => {
         const ascii = generateAsciiImage(img, options);
-        
+
         if (asciiRef.current) {
           asciiRef.current.innerText = ascii || '';
           if (ascii && ascii.length) {
@@ -80,12 +80,12 @@ export default function BuildAsciiImage() {
       {/* ready header */}
       <div className={styles.header}>
         <TerminalStatus
-          onLoad={incrementLoadCount}
+          type={'Image'}
           loadTime={time}
         />
       </div>
 
-      {/* covert options */}
+      {/* convert options */}
       <div className={styles.options}>
         <Fieldset title={'Options'} flex={1}>
           <Options
