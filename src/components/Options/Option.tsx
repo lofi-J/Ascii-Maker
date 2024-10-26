@@ -1,17 +1,9 @@
-"use client";
-import styles from "./Options.module.css";
-import {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
+import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import styles from "@/components/Options/Options.module.css";
 import InputRange from "@/components/InputRange/InputRange";
 import SelectBox from "@/components/SelectBox/SelectBox";
-import {asciiCharsPreset, defaultOptions, IOptions, limitOptionValue as LOV} from "@/modules/ascii/options";
-import Undo from "../../assets/undo.svg";
+import {asciiCharsPreset, IOptions} from "@/modules/ascii/options";
 
-
-interface IOptionsProps {
-  onLoad: () => void;
-  options: IOptions;
-  setOptions: Dispatch<SetStateAction<IOptions>>;
-}
 
 interface IOption {
   options: IOptions;
@@ -30,7 +22,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
       return {...prev, [key]: value};
     });
   }
-
+  
   const onChangeAsciiChars = (event: ChangeEvent<HTMLInputElement>) => {
     if (options['asciiChars'].length <= 100 || options['asciiChars'].length > event.target.value.length) {
       onChangeOptions('asciiChars', event.target.value);
@@ -40,7 +32,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
     const value = Number(event.target.value);
     onChangeOptions('brightnessWeight', {...options.brightnessWeight, [rgb]: value > 1 ? 1 : value});
   }
-
+  
   return (
     <div className={styles.option}>
       <span className={styles.key}>{'>'} <b className={styles.yellow}>Set</b> <b className={styles.name}>{optionName}</b>:</span>
@@ -124,78 +116,4 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
   );
 }
 
-const Options = ({onLoad, options, setOptions}: IOptionsProps) => {
-
-  const optionReset = () => {
-    setOptions(defaultOptions);
-  }
-
-  useEffect(() => {
-    onLoad();
-  }, [onLoad]);
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.options}>
-        <div className={styles.optionHeader}>
-          <div className={styles.title}>ASCII Generation Options</div>
-          <button className={styles.optionReset} onClick={optionReset}>
-            <Undo className={styles.resetSVG} />
-          </button>
-        </div>
-        <Option
-          options={options}
-          optionName={'Resolution'}
-          setOptions={setOptions}
-          optionKey={'resolution'}
-          min={LOV.resolution.min} max={LOV.resolution.max} step={10}
-        />
-        <Option
-          options={options}
-          optionName={'ASCII Characters'}
-          setOptions={setOptions}
-          optionKey={'asciiChars'}
-        />
-        <Option
-          options={options}
-          optionName={'Brightness Weight'}
-          setOptions={setOptions}
-          optionKey={'brightnessWeight'}
-          min={LOV.brightnessWeight.min}
-          max={LOV.brightnessWeight.max}
-        />
-        <hr className={styles.hr}/>
-        <div className={styles.title}>Visual Appearance Options</div>
-        <Option
-          options={options}
-          optionName={'Font size'}
-          setOptions={setOptions}
-          optionKey={'fontSize'}
-          min={LOV.fontSize.min}
-          max={LOV.fontSize.max}
-          step={1}
-        />
-        <Option
-          options={options}
-          optionName={'Line height'}
-          setOptions={setOptions}
-          optionKey={'lineHeight'}
-          min={LOV.lineHeight.min}
-          max={LOV.lineHeight.max}
-          step={0.1}
-        />
-        <Option
-          options={options}
-          optionName={'Letter spacing'}
-          setOptions={setOptions}
-          optionKey={'letterSpacing'}
-          min={LOV.letterSpacing.min}
-          max={LOV.letterSpacing.max}
-          step={0.1}
-        />
-      </div>
-    </div>
-  );
-}
-
-export default Options;
+export default Option;

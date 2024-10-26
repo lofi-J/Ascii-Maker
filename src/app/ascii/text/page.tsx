@@ -7,6 +7,7 @@ import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 import useLoadTime from "@/hooks/useLoadTime";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import {defaultOptions, IOptions} from "@/modules/ascii/options";
+import AsciiTextOptions from "@/components/Options/AsciiTextOptions";
 
 
 export default function BuildAsciiText() {
@@ -56,7 +57,11 @@ export default function BuildAsciiText() {
       {/* convert options */}
       <div className={styles.options}>
         <Fieldset title={'Options'} flex={1}>
-          some options
+          <AsciiTextOptions
+            options={options}
+            setOptions={setOptions}
+            onLoad={incrementLoadCount}
+          />
         </Fieldset>
       </div>
 

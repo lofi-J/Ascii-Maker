@@ -7,11 +7,11 @@ import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
 import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
 import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
-import Options from "@/components/Options/Options";
 import {defaultOptions, IOptions, IValidOptionsResult, validOptions} from "@/modules/ascii/options";
 import Button from "@/components/Button/Button";
 import generateAsciiImage from "@/modules/ascii/imageToAscii";
 import downloadPNG from "@/modules/ascii/downloadPNG";
+import AsciiImageOptions from "@/components/Options/AsciiImageOptions";
 
 
 export default function BuildAsciiImage() {
@@ -88,7 +88,7 @@ export default function BuildAsciiImage() {
       {/* convert options */}
       <div className={styles.options}>
         <Fieldset title={'Options'} flex={1}>
-          <Options
+          <AsciiImageOptions
             onLoad={incrementLoadCount}
             options={options}
             setOptions={setOptions}
