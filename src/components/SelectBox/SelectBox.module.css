@@ -28,6 +28,12 @@
     text-align: center;
     border: 1px solid var(--color);
     background: var(--background);
+    height: 20rem;
+    overflow-y: scroll;
+    /* SCROLL */
+    &::-webkit-scrollbar {
+      width: 0;
+    }
     .option {
       width: 100%;
       text-wrap: nowrap;

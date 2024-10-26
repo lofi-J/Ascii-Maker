@@ -3,6 +3,7 @@ import styles from "@/components/Options/Options.module.css";
 import InputRange from "@/components/InputRange/InputRange";
 import SelectBox from "@/components/SelectBox/SelectBox";
 import {asciiCharsPreset, IOptions} from "@/modules/ascii/options";
+import {FIGLET_FONTS} from "@/modules/figlet/font";
 
 
 interface IOption {
@@ -17,6 +18,7 @@ interface IOption {
 
 const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IOption) => {
   const isOnlyNumber = ['fontSize', 'lineHeight', 'letterSpacing'].includes(optionKey);
+  
   const onChangeOptions = (key: typeof optionKey, value: unknown) => {
     setOptions(prev => {
       return {...prev, [key]: value};
@@ -32,6 +34,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
     const value = Number(event.target.value);
     onChangeOptions('brightnessWeight', {...options.brightnessWeight, [rgb]: value > 1 ? 1 : value});
   }
+  
   
   return (
     <div className={styles.option}>
@@ -62,6 +65,15 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
             <SelectBox
               optionList={asciiCharsPreset}
               onChange={(value: string) => onChangeOptions('asciiChars', value)}
+            />
+          </div>
+        )}
+        {optionKey === "font" && (
+          <div className={styles.rowWrap}>
+            <span className={styles.text}>{options['font']}</span>
+            <SelectBox
+              optionList={FIGLET_FONTS}
+              onChange={(value: string) => onChangeOptions('font', value)}
             />
           </div>
         )}

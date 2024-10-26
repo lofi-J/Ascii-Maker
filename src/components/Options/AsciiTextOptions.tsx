@@ -1,6 +1,8 @@
+"use client";
 import styles from "./Options.module.css";
-import {IOptions} from "@/modules/ascii/options";
 import {Dispatch, SetStateAction, useEffect} from "react";
+import Option from "./Option";
+import {IOptions, limitOptionValue as LOV} from "@/modules/ascii/options";
 
 
 interface IAsciiTextOptions {
@@ -10,8 +12,6 @@ interface IAsciiTextOptions {
 }
 
 const AsciiTextOptions = ({options, setOptions, onLoad}: IAsciiTextOptions) => {
-  console.log(options, setOptions);
-  
   
   useEffect(() => {
     if (onLoad) {
@@ -25,10 +25,20 @@ const AsciiTextOptions = ({options, setOptions, onLoad}: IAsciiTextOptions) => {
         <div className={styles.optionHeader}>
           <div className={styles.title}>ASCII Generation Options</div>
         </div>
-        {/*<Option*/}
-        {/*  options={options}*/}
-        {/*  optionName={}*/}
-        {/*/>*/}
+        <Option
+          optionName={'Font'}
+          options={options}
+          optionKey={'font'}
+          setOptions={setOptions}
+        />
+        <Option
+          optionName={'Font size'}
+          optionKey={'fontSize'}
+          min={LOV.fontSize.min}
+          max={LOV.fontSize.max}
+          options={options}
+          setOptions={setOptions}
+        />
       </div>
     </div>
   );

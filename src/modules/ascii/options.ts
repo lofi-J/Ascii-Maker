@@ -1,3 +1,5 @@
+import figlet from "figlet";
+
 export interface IOptions {
   resolution: number;
   asciiChars: string;
@@ -5,6 +7,7 @@ export interface IOptions {
   lineHeight: number;
   fontSize: number;
   letterSpacing: number;
+  font: figlet.Fonts;
 }
 
 export const asciiCharsPreset = [
@@ -23,7 +26,8 @@ export const defaultOptions: IOptions = {
   brightnessWeight: { red: 1, green: 1, blue: 1 },
   lineHeight: 0.8,
   fontSize: 8,
-  letterSpacing: 1
+  letterSpacing: 1,
+  font: 'Greek'
 }
 
 export const limitOptionValue = {
