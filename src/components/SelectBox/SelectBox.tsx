@@ -6,16 +6,23 @@ import useOutsideClick from "@/hooks/useOutsideClick";
 
 interface ISelectBox {
   optionList: {name: string; value: string}[];
-  title: string;
+  baseItem?: {name: string; value: string};
   onChange: (value: string) => void;
 }
 
-const SelectBox = ({optionList, title, onChange}: ISelectBox) => {
+const SelectBox = ({optionList, onChange, baseItem = optionList[0]}: ISelectBox) => {
+  const [localItem, setLocalItem] = useState(baseItem);
   const ref = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   useOutsideClick(ref, () => setIsOpen(false));
   
   const toggleDropDown = () => setIsOpen(prev => !prev);
+  
+  const handler = (option: {name: string, value: string}) => {
+    onChange(option.value);
+    setLocalItem(option);
+    toggleDropDown();
+  }
   
   return (
     <div className={styles.container} ref={ref}>
@@ -23,7 +30,7 @@ const SelectBox = ({optionList, title, onChange}: ISelectBox) => {
         className={styles.button}
         onClick={() => toggleDropDown()}
       >
-        {title}
+        {localItem.name}
       </button>
       {isOpen && (
         <div className={styles.dropdown}>
@@ -31,10 +38,7 @@ const SelectBox = ({optionList, title, onChange}: ISelectBox) => {
             <div
               key={`dropdown-${option.name}-${i}`}
               className={styles.option}
-              onClick={() => {
-                onChange(option.value)
-                toggleDropDown();
-              }}
+              onClick={() => handler(option)}
             >
               {option.name}
             </div>

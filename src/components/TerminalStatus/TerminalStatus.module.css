@@ -4,7 +4,7 @@
   gap: 1.2rem;
 }
 .appVersion {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--green);
   .version {
     padding-left: 1.2rem;

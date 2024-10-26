@@ -68,7 +68,6 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
               />
             ]</span>
             <SelectBox
-              title={'Presets'}
               optionList={asciiCharsPreset}
               onChange={(value: string) => onChangeOptions('asciiChars', value)}
             />
