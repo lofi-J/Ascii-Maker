@@ -12,6 +12,7 @@ import generateAsciiImage from "@/modules/ascii/imageToAscii";
 import downloadPNG from "@/modules/ascii/downloadPNG";
 import AsciiImageOptions from "@/components/Options/AsciiImageOptions";
 import AsciiArt from "@/components/AsciiArt/AsciiArt";
+import copyClipboard from "@/modules/ascii/copyClipboard";
 
 
 export default function BuildAsciiImage() {
@@ -32,16 +33,6 @@ export default function BuildAsciiImage() {
     setEditMode(false);
     if (asciiRef.current) {
       asciiRef.current.innerText = '';
-    }
-  }
-
-  const copyClipboard = async () => {
-    if (!asciiRef.current) return;
-    try {
-      await navigator.clipboard.writeText(asciiRef.current.innerText);
-      alert("Copied to clipboard");
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -134,7 +125,7 @@ export default function BuildAsciiImage() {
             />
             <Button
               text={'Clipboard Copy'}
-              onClick={copyClipboard}
+              onClick={() => copyClipboard(asciiRef)}
               disabled={!conversionCompleted}
             />
             <Button

@@ -8,6 +8,8 @@ import Fieldset from "@/components/Fieldset/Fieldset";
 import {defaultOptions, IOptions} from "@/modules/ascii/options";
 import AsciiTextOptions from "@/components/Options/AsciiTextOptions";
 import AsciiArt from "@/components/AsciiArt/AsciiArt";
+import Button from "@/components/Button/Button";
+import copyClipboard from "@/modules/ascii/copyClipboard";
 
 
 export default function BuildAsciiText() {
@@ -21,6 +23,11 @@ export default function BuildAsciiText() {
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
+  }
+  // 폰트 프리뷰 +
+  {/* TODO 텍스트 변환 기능 초기화 함수 완성 예정 reset */}
+  const reset = () => {
+    console.log('reset!!!')
   }
 
   const generateASCII = useCallback(async () => {
@@ -63,9 +70,43 @@ export default function BuildAsciiText() {
       </div>
 
       {/* text input */}
-      <input type={'text'} value={text} onChange={onChangeInput} />
+      <div className={styles.inputText}>
+        <Fieldset title={'Text'} flex={1}>
+          <input
+            className={styles.input}
+            type={'text'}
+            value={text}
+            onChange={onChangeInput}
+          />
+        </Fieldset>
+      </div>
 
-      <button onClick={generateASCII}>Go!</button>
+      {/* Functions */}
+      <div className={styles.functions}>
+        <Fieldset title={'Function Buttons'} flex={1}>
+          <div className={styles.btnWrap}>
+            <Button
+              text={'Generate ASCII Art'}
+              onClick={generateASCII}
+              disabled={!(text.length > 0)}
+            />
+            <Button
+              text={'Clipboard Copy'}
+              onClick={() => copyClipboard(preRef)}
+              disabled={!conversionCompleted}
+            />
+            <Button
+              text={'Edit Mode'}
+              onClick={() => setEditMode(prev => !prev)}
+              disabled={!conversionCompleted}
+            />
+            <Button
+              text={'Reset All'}
+              onClick={reset}
+            />
+          </div>
+        </Fieldset>
+      </div>
 
       {/* ASCII Text */}
       <div className={styles.asciiArt}>
