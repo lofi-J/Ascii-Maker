@@ -5,12 +5,31 @@
   justify-content: center;
   position: relative;
   .button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     min-width: 11rem;
     background: transparent;
-    font-size: 1.3rem;
-    color: var(--color);
-    border: 1px solid var(--color);
-    padding: 0.2rem 0.4rem;
+    border: 1px solid var(--retro-gray);
+    border-radius: 2px;
+    .name {
+      flex: 1;
+      font-size: 1.3rem;
+      color: var(--color);
+      padding: 0.2rem 0.4rem;
+      background-color: transparent;
+    }
+    .arrowBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 1rem;
+      .arrowSVG {
+        width: 1.2rem;
+        height: 1.2rem;
+        fill: var(--color);
+      }
+    }
     &:hover {
       color: darkgrey;
     }
@@ -26,13 +45,23 @@
     gap: 0.4rem;
     padding: 0.4rem;
     text-align: center;
-    border: 1px solid var(--color);
+    border: 1px solid var(--retro-gray);
+    border-radius: 2px;
     background: var(--background);
-    height: 20rem;
-    overflow-y: scroll;
-    /* SCROLL */
+    overflow-y: auto;
+    /* SCROLL BAR */
     &::-webkit-scrollbar {
-      width: 0;
+      width: 0.4rem;
+    }
+    /* SCROLL BAR TRACK */
+    &::-webkit-scrollbar-track {
+      background-color: darkgrey;
+    }
+    /* SCROLL BAR THUMB */
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--background);
+      border-radius: 0.4rem;
+      border: 1px solid var(--color);
     }
     .option {
       width: 100%;

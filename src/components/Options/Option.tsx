@@ -75,6 +75,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
               baseItem={{ name: "Greek", value: "Greek" }}
               optionList={FIGLET_FONTS}
               onChange={(value: string) => onChangeOptions('font', value)}
+              height={'20rem'}
             />
           </div>
         )}
