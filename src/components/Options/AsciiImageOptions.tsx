@@ -28,7 +28,7 @@ const AsciiImageOptions = ({onLoad, options, setOptions}: IOptionsProps) => {
         <div className={styles.optionHeader}>
           <div className={styles.title}>ASCII Generation Options</div>
           <button className={styles.optionReset} onClick={optionReset}>
-            <Undo className={styles.resetSVG} />
+            <Undo className={styles.resetSVG}/>
           </button>
         </div>
         <Option
@@ -84,6 +84,6 @@ const AsciiImageOptions = ({onLoad, options, setOptions}: IOptionsProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default AsciiImageOptions;

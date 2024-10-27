@@ -5,13 +5,13 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
-import ImageAsciiArt from "@/components/ImageAsciiArt/ImageAsciiArt";
 import TerminalStatus from "@/components/TerminalStatus/TerminalStatus";
 import {defaultOptions, IOptions, IValidOptionsResult, validOptions} from "@/modules/ascii/options";
 import Button from "@/components/Button/Button";
 import generateAsciiImage from "@/modules/ascii/imageToAscii";
 import downloadPNG from "@/modules/ascii/downloadPNG";
 import AsciiImageOptions from "@/components/Options/AsciiImageOptions";
+import AsciiArt from "@/components/AsciiArt/AsciiArt";
 
 
 export default function BuildAsciiImage() {
@@ -158,7 +158,8 @@ export default function BuildAsciiImage() {
       {/* Ascii Art */}
       <div className={styles.asciiArt}>
         <Fieldset title="ASCII Art">
-          <ImageAsciiArt
+          <AsciiArt
+            type={'image'}
             asciiRef={asciiRef}
             conversionCompleted={conversionCompleted}
             onLoad={incrementLoadCount}

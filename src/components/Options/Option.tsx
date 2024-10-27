@@ -18,13 +18,13 @@ interface IOption {
 
 const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IOption) => {
   const isOnlyNumber = ['fontSize', 'lineHeight', 'letterSpacing'].includes(optionKey);
-  
+
   const onChangeOptions = (key: typeof optionKey, value: unknown) => {
     setOptions(prev => {
       return {...prev, [key]: value};
     });
   }
-  
+
   const onChangeAsciiChars = (event: ChangeEvent<HTMLInputElement>) => {
     if (options['asciiChars'].length <= 100 || options['asciiChars'].length > event.target.value.length) {
       onChangeOptions('asciiChars', event.target.value);
@@ -34,8 +34,8 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
     const value = Number(event.target.value);
     onChangeOptions('brightnessWeight', {...options.brightnessWeight, [rgb]: value > 1 ? 1 : value});
   }
-  
-  
+
+
   return (
     <div className={styles.option}>
       <span className={styles.key}>{'>'} <b className={styles.yellow}>Set</b> <b className={styles.name}>{optionName}</b>:</span>
@@ -72,6 +72,7 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
           <div className={styles.rowWrap}>
             <span className={styles.text}>{options['font']}</span>
             <SelectBox
+              baseItem={{ name: "Greek", value: "Greek" }}
               optionList={FIGLET_FONTS}
               onChange={(value: string) => onChangeOptions('font', value)}
             />

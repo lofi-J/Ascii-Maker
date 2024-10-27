@@ -7,6 +7,7 @@ import useLoadTime from "@/hooks/useLoadTime";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import {defaultOptions, IOptions} from "@/modules/ascii/options";
 import AsciiTextOptions from "@/components/Options/AsciiTextOptions";
+import AsciiArt from "@/components/AsciiArt/AsciiArt";
 
 
 export default function BuildAsciiText() {
@@ -14,15 +15,18 @@ export default function BuildAsciiText() {
   const preRef = useRef<HTMLPreElement | null>(null);
   const {time, incrementLoadCount} = useLoadTime(0);
   const [options, setOptions] = useState<IOptions>(defaultOptions);
+  const [conversionCompleted, setConversionCompleted] = useState(false); // 변환 완료 여부
+  const [editMode, setEditMode] = useState(false);
+
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   }
-  
+
   const generateASCII = useCallback(async () => {
     const fontModule = await import(`figlet/importable-fonts/${options.font}.js`);
     figlet.parseFont(options.font, fontModule.default);
-    
+
     if (fontModule && preRef.current) {
       figlet.text(text, { font: `${options.font}` }, (err, data) => {
         if (err) {
@@ -30,11 +34,12 @@ export default function BuildAsciiText() {
           return;
         } else if (preRef.current) {
           preRef.current.innerText = data || '';
+          setConversionCompleted(true);
         }
       });
     }
   }, [options.font, text])
-  
+
 
   return (
     <div className={styles.container}>
@@ -56,7 +61,7 @@ export default function BuildAsciiText() {
           />
         </Fieldset>
       </div>
-      
+
       {/* text input */}
       <input type={'text'} value={text} onChange={onChangeInput} />
 
@@ -65,9 +70,13 @@ export default function BuildAsciiText() {
       {/* ASCII Text */}
       <div className={styles.asciiArt}>
         <Fieldset title={'ASCII Text'}>
-          <pre
-            ref={preRef}
-            className={styles.pre}
+          <AsciiArt
+            asciiRef={preRef}
+            type={'text'}
+            conversionCompleted={conversionCompleted}
+            editMode={editMode}
+            onLoad={incrementLoadCount}
+            options={options}
           />
         </Fieldset>
       </div>
