@@ -19,15 +19,28 @@ export default function BuildAsciiText() {
   const [options, setOptions] = useState<IOptions>(defaultOptions);
   const [conversionCompleted, setConversionCompleted] = useState(false); // 변환 완료 여부
   const [editMode, setEditMode] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    const inputValue = e.target.value;
+    
+    const isValid = /^[A-Za-z0-9!@#$%^&*()_+={}\[\]:;'"\\|,.<>?~`-]*$/.test(inputValue);
+    if (isValid) {
+      setText(inputValue);
+      if (showAlert) setShowAlert(false);
+    } else {
+      setShowAlert(true);
+    }
   }
-  // 폰트 프리뷰 +
-  {/* TODO 텍스트 변환 기능 초기화 함수 완성 예정 reset */}
+  
   const reset = () => {
-    console.log('reset!!!')
+    setText('');
+    setEditMode(false);
+    setOptions(defaultOptions);
+    if (preRef.current) {
+      preRef.current.innerText = '';
+    }
   }
 
   const generateASCII = useCallback(async () => {
@@ -37,7 +50,9 @@ export default function BuildAsciiText() {
     if (fontModule && preRef.current) {
       figlet.text(text, { font: `${options.font}` }, (err, data) => {
         if (err) {
-          console.error('Failed to generate ASCII:', err);
+          if (preRef.current) {
+            preRef.current.innerText = err.message;
+          }
           return;
         } else if (preRef.current) {
           preRef.current.innerText = data || '';
@@ -70,14 +85,21 @@ export default function BuildAsciiText() {
       </div>
 
       {/* text input */}
-      <div className={styles.inputText}>
+      <div className={styles.inputContainer}>
         <Fieldset title={'Text'} flex={1}>
-          <input
-            className={styles.input}
-            type={'text'}
-            value={text}
-            onChange={onChangeInput}
-          />
+          <div className={styles.inputWrap}>
+            {showAlert && (
+              <div className={styles.alert}>
+                * Only English letters, numbers, and specific special characters are allowed.
+              </div>
+            )}
+            <input
+              className={styles.input}
+              type={'text'}
+              value={text}
+              onChange={onChangeInput}
+            />
+          </div>
         </Fieldset>
       </div>
 
