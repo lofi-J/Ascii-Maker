@@ -9,21 +9,27 @@ interface IAsciiTextOptions {
   onLoad: () => void;
   options: IOptions;
   setOptions: Dispatch<SetStateAction<IOptions>>;
+  setIsLoadAllFonts: Dispatch<SetStateAction<boolean>>;
 }
 
-const AsciiTextOptions = ({options, setOptions, onLoad}: IAsciiTextOptions) => {
-  
+const AsciiTextOptions = ({options, setOptions, onLoad, setIsLoadAllFonts}: IAsciiTextOptions) => {
+
+  const onClickLoad = () => {
+    setIsLoadAllFonts(true);
+  }
+
   useEffect(() => {
     if (onLoad) {
       onLoad();
     }
   }, [onLoad]);
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.options}>
         <div className={styles.optionHeader}>
           <div className={styles.title}>ASCII Generation Options</div>
+          <button onClick={onClickLoad} className={styles.loadBtn}>Load All Fonts</button>
         </div>
         <Option
           optionName={'Font'}

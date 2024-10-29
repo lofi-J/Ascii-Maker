@@ -10,6 +10,7 @@ import AsciiTextOptions from "@/components/Options/AsciiTextOptions";
 import AsciiArt from "@/components/AsciiArt/AsciiArt";
 import Button from "@/components/Button/Button";
 import copyClipboard from "@/modules/ascii/copyClipboard";
+import LoadAllFont from "@/components/LoadAllFont/LoadAllFont";
 
 
 export default function BuildAsciiText() {
@@ -20,12 +21,13 @@ export default function BuildAsciiText() {
   const [conversionCompleted, setConversionCompleted] = useState(false); // 변환 완료 여부
   const [editMode, setEditMode] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [isLoadAllFonts, setIsLoadAllFonts] = useState(false); // 모든 폰트 fetch 여부
 
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    
-    const isValid = /^[A-Za-z0-9!@#$%^&*()_+={}\[\]:;'"\\|,.<>?~`-]*$/.test(inputValue);
+
+    const isValid = /^[A-Za-z0-9 !@#$%^&*()_+={}\[\]:;'"\\|,.<>?~`-]*$/.test(inputValue);
     if (isValid) {
       setText(inputValue);
       if (showAlert) setShowAlert(false);
@@ -33,7 +35,7 @@ export default function BuildAsciiText() {
       setShowAlert(true);
     }
   }
-  
+
   const reset = () => {
     setText('');
     setEditMode(false);
@@ -80,6 +82,7 @@ export default function BuildAsciiText() {
             options={options}
             setOptions={setOptions}
             onLoad={incrementLoadCount}
+            setIsLoadAllFonts={setIsLoadAllFonts}
           />
         </Fieldset>
       </div>
@@ -143,6 +146,13 @@ export default function BuildAsciiText() {
           />
         </Fieldset>
       </div>
+
+      {/* Load All Font */}
+      {isLoadAllFonts && (
+        <div className={styles.loadAllFont}>
+          <LoadAllFont />
+        </div>
+      )}
     </div>
   );
 }

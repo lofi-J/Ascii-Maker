@@ -11,6 +11,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .loadBtn {
+        cursor: pointer;
+        background-color: transparent;
+        color: var(--color);
+        padding: 0.2rem 0.4rem;
+        border: 1px solid dimgray;
+        &:hover {
+          color: lightblue;
+        }
+      }
       .optionReset {
         background-color: transparent;
         .resetSVG {
