@@ -150,7 +150,9 @@ export default function BuildAsciiText() {
       {/* Load All Font */}
       {isLoadAllFonts && (
         <div className={styles.loadAllFont}>
-          <LoadAllFont />
+          <LoadAllFont
+            options={options}
+          />
         </div>
       )}
     </div>

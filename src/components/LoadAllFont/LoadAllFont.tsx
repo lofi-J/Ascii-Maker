@@ -2,9 +2,10 @@ import styles from "./LoadAllFont.module.css";
 import {useEffect, useRef, useState} from "react";
 import figlet from "figlet";
 import {FIGLET_FONTS} from "@/modules/figlet/font";
+import {IOptions} from "@/modules/ascii/options";
 
 
-const LoadAllFont = () => {
+const LoadAllFont = ({options}: {options: IOptions}) => {
   const [loadedCount, setLoadedCount] = useState(0);
   const previewRef = useRef<HTMLDivElement>(null);
   const [previewList, setPreviewList] = useState<{fontName: figlet.Fonts, preview: string}[]>([]); // 미리보기 폰트 상태
@@ -37,25 +38,25 @@ const LoadAllFont = () => {
     <div className={styles.container}>
       <div className={styles.titleWrap}>
         <pre className={styles.pre}>{`
-          :::     :::        :::           :::::::::: ::::::::  ::::    ::: ::::::::::: 
-       :+: :+:   :+:        :+:           :+:       :+:    :+: :+:+:   :+:     :+:      
-     +:+   +:+  +:+        +:+           +:+       +:+    +:+ :+:+:+  +:+     +:+       
-   +#++:++#++: +#+        +#+           :#::+::#  +#+    +:+ +#+ +:+ +#+     +#+        
-  +#+     +#+ +#+        +#+           +#+       +#+    +#+ +#+  +#+#+#     +#+         
- #+#     #+# #+#        #+#           #+#       #+#    #+# #+#   #+#+#     #+#          
-###     ### ########## ##########    ###        ########  ###    ####     ###           
+          :::     :::        :::           :::::::::: ::::::::  ::::    ::: :::::::::::
+       :+: :+:   :+:        :+:           :+:       :+:    :+: :+:+:   :+:     :+:
+     +:+   +:+  +:+        +:+           +:+       +:+    +:+ :+:+:+  +:+     +:+
+   +#++:++#++: +#+        +#+           :#::+::#  +#+    +:+ +#+ +:+ +#+     +#+
+  +#+     +#+ +#+        +#+           +#+       +#+    +#+ +#+  +#+#+#     +#+
+ #+#     #+# #+#        #+#           #+#       #+#    #+# #+#   #+#+#     #+#
+###     ### ########## ##########    ###        ########  ###    ####     ###
         `}</pre>
         <div className={styles.progress}>Loaded : {loadedCount} of {FIGLET_FONTS.length}</div>
       </div>
       <div className={styles.previewListWrap}>
         <div className={styles.preview} ref={previewRef}>
           {previewList && previewList.map(({fontName, preview}, index) => (
-            <pre
-              key={`font-preview-${index}: ${fontName}`}
-              className={styles.ascii}
-            >
-              {preview}
-            </pre>
+            <div className={styles.card} key={`font-preview-${index}: ${fontName}`}>
+              <pre className={styles.ascii} style={{fontSize: options.fontSize}}>
+                {preview}
+              </pre>
+              <div>{fontName}</div>
+            </div>
           ))}
         </div>
       </div>

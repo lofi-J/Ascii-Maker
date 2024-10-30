@@ -17,6 +17,8 @@
         color: var(--color);
         padding: 0.2rem 0.4rem;
         border: 1px solid dimgray;
+        border-radius: 0.2rem;
+        font-size: 1.2rem;
         &:hover {
           color: lightblue;
         }
