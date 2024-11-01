@@ -27,7 +27,7 @@ export const defaultOptions: IOptions = {
   lineHeight: 0.8,
   fontSize: 8,
   letterSpacing: 1,
-  font: 'Greek'
+  font: 'ANSI Shadow'
 }
 
 export const limitOptionValue = {
@@ -45,12 +45,12 @@ export interface IValidOptionsResult {
 export const validOptions = (options: IOptions): IValidOptionsResult => {
   let isPass = true;
   const warringList: IValidOptionsResult["warringList"] = [];
-  
+
   // warring condition
   if (options.resolution >= 400) {
     warringList.push({case: 'warring', text: "Selecting a high resolution can increase memory usage and lead to performance degradation."});
   }
-  
+
   const zeroWeights = [
     options.brightnessWeight.red === 0,
     options.brightnessWeight.green === 0,
@@ -63,6 +63,6 @@ export const validOptions = (options: IOptions): IValidOptionsResult => {
     isPass = false;
     warringList.push({case: 'error', text: "Brightness weights cannot be all set to zero. Please adjust the values to ensure proper brightness calculation."});
   }
-  
+
   return {isPass: isPass, warringList: warringList};
 }

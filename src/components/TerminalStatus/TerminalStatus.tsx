@@ -22,14 +22,19 @@ const TerminalStatus = ({loadTime, type}: ITerminalStatus) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const agentData = window.navigator.userAgentData;
-      const brands = agentData.brands;
-      const isMobile = agentData.mobile;
-      const platform = agentData.platform;
-      setAgentData({
-        brands: brands,
-        isMobile: isMobile,
-        platform: platform
-      })
+      console.log(agentData);
+      if (agentData) {
+        const brands = agentData.brands;
+        const isMobile = agentData.mobile;
+        const platform = agentData.platform;
+        setAgentData({
+          brands: brands,
+          isMobile: isMobile,
+          platform: platform
+        })
+      } else {
+        return;
+      }
     }
   }, []);
 

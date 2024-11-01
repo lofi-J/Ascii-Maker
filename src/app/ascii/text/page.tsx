@@ -152,6 +152,7 @@ export default function BuildAsciiText() {
         <div className={styles.loadAllFont}>
           <LoadAllFont
             options={options}
+            setOptions={setOptions}
           />
         </div>
       )}

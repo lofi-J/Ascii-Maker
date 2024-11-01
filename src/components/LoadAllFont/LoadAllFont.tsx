@@ -1,15 +1,28 @@
 import styles from "./LoadAllFont.module.css";
-import {useEffect, useRef, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import figlet from "figlet";
 import {FIGLET_FONTS} from "@/modules/figlet/font";
 import {IOptions} from "@/modules/ascii/options";
 
 
-const LoadAllFont = ({options}: {options: IOptions}) => {
+interface ILoadAllFont {
+  options: IOptions;
+  setOptions: Dispatch<SetStateAction<IOptions>>;
+}
+const LoadAllFont = ({options, setOptions}: ILoadAllFont) => {
   const [loadedCount, setLoadedCount] = useState(0);
   const previewRef = useRef<HTMLDivElement>(null);
   const [previewList, setPreviewList] = useState<{fontName: figlet.Fonts, preview: string}[]>([]); // 미리보기 폰트 상태
 
+
+  const setFont = (font: figlet.Fonts) => {
+    setOptions(prev => {
+      return {
+        ...prev,
+        font: font
+      }
+    })
+  }
 
   const loadFont = async (fontName: figlet.Fonts) => {
     try {
@@ -38,13 +51,12 @@ const LoadAllFont = ({options}: {options: IOptions}) => {
     <div className={styles.container}>
       <div className={styles.titleWrap}>
         <pre className={styles.pre}>{`
-          :::     :::        :::           :::::::::: ::::::::  ::::    ::: :::::::::::
-       :+: :+:   :+:        :+:           :+:       :+:    :+: :+:+:   :+:     :+:
-     +:+   +:+  +:+        +:+           +:+       +:+    +:+ :+:+:+  +:+     +:+
-   +#++:++#++: +#+        +#+           :#::+::#  +#+    +:+ +#+ +:+ +#+     +#+
-  +#+     +#+ +#+        +#+           +#+       +#+    +#+ +#+  +#+#+#     +#+
- #+#     #+# #+#        #+#           #+#       #+#    #+# #+#   #+#+#     #+#
-###     ### ########## ##########    ###        ########  ###    ####     ###
+ █████╗ ██╗     ██╗         ███████╗ ██████╗ ███╗   ██╗████████╗███████╗
+██╔══██╗██║     ██║         ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔════╝
+███████║██║     ██║         █████╗  ██║   ██║██╔██╗ ██║   ██║   ███████╗
+██╔══██║██║     ██║         ██╔══╝  ██║   ██║██║╚██╗██║   ██║   ╚════██║
+██║  ██║███████╗███████╗    ██║     ╚██████╔╝██║ ╚████║   ██║   ███████║
+╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚══════╝
         `}</pre>
         <div className={styles.progress}>Loaded : {loadedCount} of {FIGLET_FONTS.length}</div>
       </div>
@@ -55,7 +67,10 @@ const LoadAllFont = ({options}: {options: IOptions}) => {
               <pre className={styles.ascii} style={{fontSize: options.fontSize}}>
                 {preview}
               </pre>
-              <div>{fontName}</div>
+              <div className={styles.info}>
+                <div className={styles.fontName}>Font Name: {fontName}</div>
+                <button className={styles.btn} onClick={() => setFont(fontName)}>Use Font</button>
+              </div>
             </div>
           ))}
         </div>

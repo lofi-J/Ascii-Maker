@@ -72,7 +72,8 @@ const Option = ({options, optionName, setOptions, optionKey, min, max, step}: IO
           <div className={styles.rowWrap}>
             <span className={styles.text}>{options['font']}</span>
             <SelectBox
-              baseItem={{ name: "Greek", value: "Greek" }}
+              title={options.font}
+              baseItem={{ name: "ANSI Shadow", value: "ANSI Shadow" }}
               optionList={FIGLET_FONTS}
               onChange={(value: string) => onChangeOptions('font', value)}
               height={'20rem'}

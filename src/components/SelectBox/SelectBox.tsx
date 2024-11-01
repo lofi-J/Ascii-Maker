@@ -6,26 +6,27 @@ import Arrow from "../../assets/arrow.svg";
 
 
 interface ISelectBox {
+  title?: string;
   optionList: {name: string; value: string}[];
   baseItem?: {name: string; value: string};
   onChange: (value: string) => void;
   height?: string;
 }
 
-const SelectBox = ({optionList, onChange, baseItem = optionList[0], height = 'auto'}: ISelectBox) => {
+const SelectBox = ({title, optionList, onChange, baseItem = optionList[0], height = 'auto'}: ISelectBox) => {
   const [localItem, setLocalItem] = useState(baseItem);
   const ref = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   useOutsideClick(ref, () => setIsOpen(false));
-  
+
   const toggleDropDown = () => setIsOpen(prev => !prev);
-  
+
   const handler = (option: {name: string, value: string}) => {
     onChange(option.value);
     setLocalItem(option);
     toggleDropDown();
   }
-  
+
   const inLineStyle: CSSProperties = {
     height: height,
     borderRight: height === 'auto' ? '1px solid var(--color)' : 'unset'
@@ -33,14 +34,14 @@ const SelectBox = ({optionList, onChange, baseItem = optionList[0], height = 'au
   const toggleStyle: CSSProperties = {
     transform: isOpen ? "rotate(-90deg)" : "rotate(90deg)",
   }
-  
+
   return (
     <div className={styles.container} ref={ref}>
       <button
         className={styles.button}
         onClick={() => toggleDropDown()}
       >
-        <span className={styles.name}>{localItem.name}</span>
+        <span className={styles.name}>{title || localItem.name}</span>
         <span className={styles.arrowBox}><Arrow className={styles.arrowSVG} style={toggleStyle} /></span>
       </button>
       {isOpen && (
