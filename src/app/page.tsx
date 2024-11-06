@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import SelectMode from "@/components/SelectMode/SelectMode";
+import {ASCII_TEXT_TITLE} from "@/static/AsciiText";
 
 
 export default function Home() {
@@ -8,12 +9,8 @@ export default function Home() {
       <div className={styles.inner}>
         <div className={styles.textWrap}>
           <pre className={styles.mainTitle}>
-{`
- █████  ███████  ██████ ██ ██      █████  ██████  ████████
-██   ██ ██      ██      ██ ██     ██   ██ ██   ██    ██
-███████ ███████ ██      ██ ██     ███████ ██████     ██
-██   ██      ██ ██      ██ ██     ██   ██ ██   ██    ██
-██   ██ ███████  ██████ ██ ██     ██   ██ ██   ██    ██`}</pre>
+            {ASCII_TEXT_TITLE}
+          </pre>
           <h3 className={styles.info}><b>Author: Lofi-J</b><b>(v.1.0)</b></h3>
           <div className={styles.emailAndGithub}>
             <div>===========================================================================</div>

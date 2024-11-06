@@ -1,7 +1,7 @@
 "use client";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import styles from "./page.module.css";
 import useLoadTime from "@/hooks/useLoadTime";
-import React, {useCallback, useEffect, useRef, useState} from "react";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import Fieldset from "@/components/Fieldset/Fieldset";
 import Status from "@/components/Status/Status";
@@ -24,8 +24,7 @@ export default function BuildAsciiImage() {
   const [optionsValid, setOptionsValid] = useState<IValidOptionsResult>({isPass: true, warringList: []}); // option 검사결과
   const asciiRef = useRef<HTMLPreElement>(null); // ASCII Art string
   const [editMode, setEditMode] = useState(false);
-
-
+  
   const reset = () => {
     setImageFile(null);
     setOptions(defaultOptions);

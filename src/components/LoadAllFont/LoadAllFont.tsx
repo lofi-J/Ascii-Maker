@@ -1,8 +1,9 @@
-import styles from "./LoadAllFont.module.css";
 import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
+import styles from "./LoadAllFont.module.css";
 import figlet from "figlet";
-import {FIGLET_FONTS} from "@/modules/figlet/font";
 import {IOptions} from "@/modules/ascii/options";
+import {FIGLET_FONTS} from "@/modules/figlet/font";
+import {ASCII_TEXT_ALL_FONTS} from "@/static/AsciiText";
 
 
 interface ILoadAllFont {
@@ -50,14 +51,7 @@ const LoadAllFont = ({options, setOptions}: ILoadAllFont) => {
   return (
     <div className={styles.container}>
       <div className={styles.titleWrap}>
-        <pre className={styles.pre}>{`
- █████╗ ██╗     ██╗         ███████╗ ██████╗ ███╗   ██╗████████╗███████╗
-██╔══██╗██║     ██║         ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔════╝
-███████║██║     ██║         █████╗  ██║   ██║██╔██╗ ██║   ██║   ███████╗
-██╔══██║██║     ██║         ██╔══╝  ██║   ██║██║╚██╗██║   ██║   ╚════██║
-██║  ██║███████╗███████╗    ██║     ╚██████╔╝██║ ╚████║   ██║   ███████║
-╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚══════╝
-        `}</pre>
+        <pre className={styles.pre}>{ASCII_TEXT_ALL_FONTS}</pre>
         <div className={styles.progress}>Loaded : {loadedCount} of {FIGLET_FONTS.length}</div>
       </div>
       <div className={styles.previewListWrap}>
