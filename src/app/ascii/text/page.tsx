@@ -91,11 +91,7 @@ export default function BuildAsciiText() {
       <div className={styles.inputContainer}>
         <Fieldset title={'Text'} flex={1}>
           <div className={styles.inputWrap}>
-            {showAlert && (
-              <div className={styles.alert}>
-                * Only English letters, numbers, and specific special characters are allowed.
-              </div>
-            )}
+            {showAlert && (<div className={styles.alert}>* Only English letters, numbers, and specific special characters are allowed.</div>)}
             <input
               className={styles.input}
               type={'text'}
