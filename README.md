@@ -1,5 +1,21 @@
-타 웹 사이트에서 텍스트 => 아스키아트로 변환시 각 옵션의 영문 명만을 드랍 다운형식으로 제시해준다.
+# Ascii Art Maker 🎨
+[Web Site Link](https://ascii-art-maker.up.railway.app/)
+<pre>
+   █████  ███████  ██████ ██ ██      █████  ██████  ████████
+  ██   ██ ██      ██      ██ ██     ██   ██ ██   ██    ██
+  ███████ ███████ ██      ██ ██     ███████ ██████     ██
+  ██   ██      ██ ██      ██ ██     ██   ██ ██   ██    ██
+  ██   ██ ███████  ██████ ██ ██     ██   ██ ██   ██    ██
+</pre>
 
-일반적인 유저는 옵션의 영문만으로는 한눈에 원하는 형식을 찾을 수 없음 
+이미지나 텍스트를 아스키 아트로 변환해주는 웹 애플리케이션입니다.<br> 
+**Next.js**와 **TypeScript**, **CSS Modules**를 사용해 구축된 정적 사이트이며, <br>
+사용자가 입력한 이미지를 다양한 스타일로 변환할 수 있습니다.
 
-변환 옵션을 제시해줄 때 변환된 아트와 옵션 정보를 카드 형태로 제작해 사용자에게 제공하면 더 좋을것 같음.
+## Tech Stack 🛠️
+ * Framework: **Next.js (v 14)**
+ * Language: **TypeScript**
+ * Styles: **CSS Modules**
+ * Deployment: **Railway**
+
+![ASM_landing](https://github.com/user-attachments/assets/e1175372-e554-4a83-9450-449f2fbb58cd)
