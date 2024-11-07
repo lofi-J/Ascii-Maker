@@ -11,7 +11,7 @@ type TMemoryInfo = {usedSize: number, totalSize: number};
 const byteToMib = (byte: number) => byte / 1048576;
 
 const useMemory = () => {
-  const [memoryInfo, setMemoryInfo] = useState<TMemoryInfo>();
+  const [memoryInfo, setMemoryInfo] = useState<TMemoryInfo | null>(null);
   
   useEffect(() => {
     if (typeof window !== 'undefined' && 'memory' in performance) {
